@@ -48,6 +48,10 @@ pydantic
 fastapi
 python-multipart
 markdown
+<<<<<<< HEAD
 langchain==0.0.263
 pdfkit
 >>>>>>> 3e1ea2e (chore(requirements.txt): add pdfkit as a new dependency)
+=======
+litellm==0.1.2291
+>>>>>>> d55178f (adding support for Claude, Cohere and PaLM)
