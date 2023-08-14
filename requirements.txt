@@ -1,12 +1,20 @@
 # dependencies
 asyncio==3.4.3
-beautifulsoup4==4.12.2
+beautifulsoup4
 colorama==0.4.6
+<<<<<<< HEAD
 duckduckgo_search==4.1.1
 md2pdf==1.0.1
 playwright==1.40.0
 openai~=1.6.1
 python-dotenv~=1.0.0
+=======
+duckduckgo_search==3.8.5
+md2pdf==1.0.1
+openai
+playwright
+python-dotenv
+>>>>>>> 7e19ed6 (chore(requirements.txt): update beautifulsoup4 and duckduckgo_search versions)
 pyyaml==6.0.1
 selenium==4.15.2
 webdriver-manager==4.0.1
