@@ -5,10 +5,14 @@ services:
     build: ./
     environment: 
 <<<<<<< HEAD
+<<<<<<< HEAD
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       TAVILY_API_KEY: ${TAVILY_API_KEY}
 =======
       OPENAI_API_KEY: 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
 >>>>>>> 9d45c87 (fix(prompts.py): update the prompt message to specify that the response should be in JSON format)
+=======
+      OPENAI_API_KEY: key
+>>>>>>> 33d0551 (Update docker-compose.yml)
     ports:
       - 8000:8000
