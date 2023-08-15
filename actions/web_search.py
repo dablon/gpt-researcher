@@ -3,7 +3,6 @@ import json
 import traceback
 from duckduckgo_search import DDGS
 
-ddgs = DDGS()
 
 def web_search(query: str, num_results: int = 5) -> str:
     """Function for performing internet search queries."""
@@ -12,6 +11,7 @@ def web_search(query: str, num_results: int = 5) -> str:
     if not query:
         return json.dumps(search_results)
     try:
+        ddgs = DDGS()
         results = ddgs.text(query)
         if results is None:
             print("No results found.")
