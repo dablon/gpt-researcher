@@ -4,22 +4,24 @@ import traceback
 from duckduckgo_search import DDGS
 
 ddgs = DDGS()
+
 def web_search(query: str, num_results: int = 5) -> str:
-    """Useful for general internet search queries."""
-    print("Searching with query {0}...".format(query))
+    """Function for performing internet search queries."""
+    print("Searching with query: {0}".format(query))
     search_results = []
 
     try:
         results = ddgs.text(query)
         results = list(results)
-    except AssertionError:
+    except Exception as e:
         traceback_str = traceback.format_exc()
-        print("Ignoring error:", traceback_str)
+        print("Error occurred while searching:")
+        print(traceback_str)
         return json.dumps(search_results)
 
     if results is None:
+        print("No results found.")
         return json.dumps(search_results)
-
 
     total_added = 0
     for j in results:
