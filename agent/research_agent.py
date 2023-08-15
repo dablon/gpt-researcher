@@ -170,14 +170,11 @@ class ResearchAgent:
         """
         try:
             self.research_summary = read_txt_files(self.dir_path) if os.path.isdir(self.dir_path) else ""
-
             if not self.research_summary:
                 search_queries = await self.create_search_queries()
-                num_queries = len(search_queries)
-                for idx, query in enumerate(search_queries, 1):
-                    await self.websocket.send_json(
-                        {"type": "logs", "output": f"💡 Research query [{idx}/{num_queries}]: {query}..."})
-                    await self.run_search_summary(query)
+                for query in search_queries:
+                    research_result = await self.run_search_summary(query)
+                    self.research_summary += f"{research_result}\n\n"
 
             await self.websocket.send_json(
                 {"type": "logs", "output": f"Total research words: {len(self.research_summary.split(' '))}"})
