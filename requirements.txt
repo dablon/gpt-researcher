@@ -8,7 +8,7 @@ openai
 playwright
 python-dotenv
 pyyaml==6.0.1
-selenium==4.11.2
+selenium==4.10.0
 webdriver-manager==4.0.0
 flask
 uvicorn

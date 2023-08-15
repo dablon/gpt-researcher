@@ -9,18 +9,18 @@ def web_search(query: str, num_results: int = 5) -> str:
     """Function for performing internet search queries."""
     print("Searching with query: {0}".format(query))
     search_results = []
-
+    if not query:
+        return json.dumps(search_results)
     try:
         results = ddgs.text(query)
-        results = list(results)
+        if results is None:
+            print("No results found.")
+            return json.dumps(search_results)
+        # results = list(results)
     except Exception as e:
         traceback_str = traceback.format_exc()
         print("Error occurred while searching:")
         print(traceback_str)
-        return json.dumps(search_results)
-
-    if results is None:
-        print("No results found.")
         return json.dumps(search_results)
 
     total_added = 0

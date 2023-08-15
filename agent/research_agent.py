@@ -124,7 +124,7 @@ class ResearchAgent:
 
             # Create a list to hold the coroutine objects
             # tasks = [async_browse(url, query, self.websocket) for url in await new_search_urls]
-            tasks = [async_browse(url, query, self.websocket) for url in new_search_urls]
+            tasks = [async_browse(url, query, self.websocket) for url in await new_search_urls]
 
 
             # Gather the results as they become available
