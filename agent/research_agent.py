@@ -153,7 +153,11 @@ class ResearchAgent:
             write_to_file(filename, result)
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
+            try:
+                print({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
+                await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
+            except Exception:
+                pass
         finally:
             await self.websocket.close()
 
