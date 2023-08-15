@@ -32,7 +32,8 @@ const GPTResearcher = (() => {
         } else if (data.type === 'path') {
           updateState("finished")
           updateDownloadLink(data);
-
+        } else if (data.type === 'progress') {
+          updateProgress(data.progress);
         }
       };
   
@@ -69,6 +70,12 @@ const GPTResearcher = (() => {
     const updateDownloadLink = (data) => {
       const path = data.output;
       document.getElementById("downloadLink").setAttribute("href", path);
+    };
+  
+    const updateProgress = (progress) => {
+      const progressBar = document.querySelector('.progress-bar');
+      progressBar.style.width = `${progress}%`;
+      progressBar.setAttribute('aria-valuenow', progress);
     };
   
     const updateScroll = () => {
