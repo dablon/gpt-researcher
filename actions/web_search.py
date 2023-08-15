@@ -3,13 +3,13 @@ import json
 import traceback
 from duckduckgo_search import DDGS
 
-def web_search(query: str, num_results: int = 8) -> str:
+ddgs = DDGS()
+def web_search(query: str, num_results: int = 5) -> str:
     """Useful for general internet search queries."""
     print("Searching with query {0}...".format(query))
     search_results = []
 
     try:
-        ddgs = DDGS()
         results = ddgs.text(query)
         results = list(results)
     except AssertionError:
