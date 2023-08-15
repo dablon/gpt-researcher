@@ -170,7 +170,6 @@ class ResearchAgent:
         """
         try:
             self.research_summary = read_txt_files(self.dir_path) if os.path.isdir(self.dir_path) else ""
-
             if not self.research_summary:
                 search_queries = await self.create_search_queries()
                 num_queries = len(search_queries)
