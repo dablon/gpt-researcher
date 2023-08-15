@@ -1,5 +1,4 @@
 import traceback
-
 import asyncio
 import json
 import uuid
@@ -50,7 +49,7 @@ class ResearchAgent:
             )
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred during summarization: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred during summarization: {str(e)}"})
             return ""
 
     async def get_new_urls(self, url_set_input):
@@ -69,7 +68,7 @@ class ResearchAgent:
             return new_urls
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while getting new urls: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while getting new urls: {str(e)}"})
             return []
 
     async def call_agent(self, action, stream=False, websocket=None):
@@ -90,7 +89,7 @@ class ResearchAgent:
             return answer
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while calling agent: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while calling agent: {str(e)}"})
             return ""
 
     async def create_search_queries(self):
@@ -101,13 +100,12 @@ class ResearchAgent:
         try:
             result = await self.call_agent(prompts.generate_search_queries_prompt(self.question))
             print(f"result = {result}", file=sys.stderr, flush=True)
-            print(result)
+
             await self.websocket.send_json({"type": "logs", "output": f"🧠 I will conduct my research based on the following queries: {result}..."})
-            # return json.loads(result)
             return json.loads(result) if type(result) != str else result.strip("[]").replace('"', '').split("] [")
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while creating search queries: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while creating search queries: {str(e)}"})
             return []
 
     async def async_search(self, query):
@@ -117,23 +115,19 @@ class ResearchAgent:
         """
         try:
             search_results = json.loads(web_search(query))
-            new_search_urls = self.get_new_urls([url.get("href") for url in search_results])
+            new_search_urls = await self.get_new_urls([url.get("href") for url in search_results])
 
             await self.websocket.send_json(
                 {"type": "logs", "output": f"🌐 Browsing the following sites for relevant information: {new_search_urls}..."})
 
-            # Create a list to hold the coroutine objects
-            # tasks = [async_browse(url, query, self.websocket) for url in await new_search_urls]
-            tasks = [async_browse(url, query, self.websocket) for url in await new_search_urls]
+            tasks = [async_browse(url, query, self.websocket) for url in new_search_urls]
 
-
-            # Gather the results as they become available
             responses = await asyncio.gather(*tasks, return_exceptions=True)
 
             return responses
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred during async search: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred during async search: {str(e)}"})
             return []
 
     async def run_search_summary(self, query):
@@ -155,11 +149,7 @@ class ResearchAgent:
             write_to_file(filename, result)
         except Exception as e:
             traceback.print_exc()
-            try:
-                print({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
-                await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
-            except Exception:
-                pass
+            print({"type": "error", "output": f"An error occurred during search summary: {str(e)}"})
         finally:
             await self.websocket.close()
 
@@ -186,7 +176,7 @@ class ResearchAgent:
             return self.research_summary
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred during research: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred during research: {str(e)}"})
             return ""
 
     async def create_concepts(self):
@@ -200,7 +190,7 @@ class ResearchAgent:
             return json.loads(result)
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while creating concepts: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while creating concepts: {str(e)}"})
             return []
 
     async def write_report(self, report_type, websocket):
@@ -224,7 +214,7 @@ class ResearchAgent:
             return answer, path
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while writing report: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while writing report: {str(e)}"})
             return "", ""
 
     async def write_lessons(self):
@@ -242,4 +232,4 @@ class ResearchAgent:
                 await write_md_to_pdf("Lesson", self.directory_name, answer)
         except Exception as e:
             traceback.print_exc()
-            print({"type": "logs", "output": f"❌ Error occurred while writing lessons: {str(e)}"})
+            print({"type": "error", "output": f"An error occurred while writing lessons: {str(e)}"})
