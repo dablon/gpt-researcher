@@ -11,6 +11,7 @@ def web_search(query: str, num_results: int = Config().num_search_queries) -> st
     if not query:
         return json.dumps(search_results)
     try:
+        ddgs = DDGS()
         results = ddgs.text(query)
         if results is None:
             print("No results found.")
