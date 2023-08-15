@@ -10,7 +10,6 @@ def web_search(query: str, num_results: int = Config().num_search_queries) -> st
     search_results = []
 
     try:
-        ddgs = DDGS()
         results = ddgs.text(query)
         results = list(results)
     except AssertionError:

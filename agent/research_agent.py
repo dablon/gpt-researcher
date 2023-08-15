@@ -50,7 +50,7 @@ class ResearchAgent:
             )
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during summarization: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred during summarization: {str(e)}"})
             return ""
 
     async def get_new_urls(self, url_set_input):
@@ -69,7 +69,7 @@ class ResearchAgent:
             return new_urls
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while getting new urls: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while getting new urls: {str(e)}"})
             return []
 
     async def call_agent(self, action, stream=False, websocket=None):
@@ -90,7 +90,7 @@ class ResearchAgent:
             return answer
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while calling agent: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while calling agent: {str(e)}"})
             return ""
 
     async def create_search_queries(self):
@@ -107,7 +107,7 @@ class ResearchAgent:
             return json.loads(result) if type(result) != str else result.strip("[]").replace('"', '').split("] [")
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while creating search queries: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while creating search queries: {str(e)}"})
             return []
 
     async def async_search(self, query):
@@ -131,7 +131,7 @@ class ResearchAgent:
             return responses
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during async search: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred during async search: {str(e)}"})
             return []
 
     async def run_search_summary(self, query):
@@ -185,7 +185,7 @@ class ResearchAgent:
             return self.research_summary
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during research: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred during research: {str(e)}"})
             return ""
 
     async def create_concepts(self):
@@ -199,7 +199,7 @@ class ResearchAgent:
             return json.loads(result)
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while creating concepts: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while creating concepts: {str(e)}"})
             return []
 
     async def write_report(self, report_type, websocket):
@@ -223,7 +223,7 @@ class ResearchAgent:
             return answer, path
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while writing report: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while writing report: {str(e)}"})
             return "", ""
 
     async def write_lessons(self):
@@ -241,4 +241,4 @@ class ResearchAgent:
                 await write_md_to_pdf("Lesson", self.directory_name, answer)
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while writing lessons: {str(e)}"})
+            print({"type": "logs", "output": f"❌ Error occurred while writing lessons: {str(e)}"})
