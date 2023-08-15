@@ -136,8 +136,10 @@ class ResearchAgent:
 
     async def run_search_summary(self, query):
         """ Runs the search summary for the given query.
-        Args: query (str): The query to run the search summary for
-        Returns: str: The search summary for the given query
+        Args:
+            query (str): The query to run the search summary for
+        Returns:
+            str: The search summary for the given query
         """
         try:
             await self.websocket.send_json({"type": "logs", "output": f"🔎 Running research for '{query}'..."})
@@ -152,6 +154,8 @@ class ResearchAgent:
         except Exception as e:
             traceback.print_exc()
             await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during search summary: {str(e)}"})
+        finally:
+            await self.websocket.close()
 
     async def conduct_research(self):
         """ Conducts the research for the given question.
