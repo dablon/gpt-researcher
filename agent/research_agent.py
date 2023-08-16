@@ -165,6 +165,7 @@ class ResearchAgent:
             if not self.research_summary:
                 search_queries = await self.create_search_queries()
                 num_queries = len(search_queries)
+                idx = 0
                 for query in search_queries:
                         for channel in self.channels:
                             idx += 1
