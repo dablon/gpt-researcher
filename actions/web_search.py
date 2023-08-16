@@ -12,7 +12,7 @@ def web_search(query: str, num_results: int = Config().num_search_queries) -> st
     try:
         ddgs = DDGS()
         results = ddgs.text(query)
-        results = list(results)
+        # results = list(results)
     except AssertionError:
         traceback_str = traceback.format_exc()
         print("Ignoring error:", traceback_str)
