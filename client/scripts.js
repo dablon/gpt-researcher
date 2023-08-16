@@ -55,6 +55,16 @@ const GPTResearcher = (() => {
       const markdownOutput = converter.makeHtml(data.output);
       reportContainer.innerHTML += markdownOutput;
       updateScroll();
+
+      // Find all the Mermaid diagrams in the report container
+      const mermaidDiagrams = reportContainer.querySelectorAll(".mermaid");
+
+      // Render each Mermaid diagram
+      mermaidDiagrams.forEach((diagram) => {
+        mermaid.render(diagram.id, diagram.textContent, (svgCode) => {
+          diagram.innerHTML = svgCode;
+        });
+      });
     };
   
     const updateDownloadLink = (data) => {
@@ -89,4 +99,4 @@ const GPTResearcher = (() => {
       startResearch,
       copyToClipboard,
     };
-  })();
+})();
