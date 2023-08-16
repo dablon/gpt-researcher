@@ -31,7 +31,7 @@ class ResearchAgent:
         self.directory_name = uuid.uuid4()
         self.dir_path = os.path.dirname(f"./outputs/{self.directory_name}/")
         self.websocket = websocket
-        self.channels = ["site:twitter.com","site:quora.com","site:reddit.com","site:medium.com","site:trustpilot.com","site:sensortower.com"]
+        self.channels = [" site:twitter.com"," site:quora.com"," site:reddit.com"," site:medium.com"," site:trustpilot.com"," site:sensortower.com"]
         self.progress = 0
 
     async def summarize(self, text, topic):
@@ -99,7 +99,7 @@ class ResearchAgent:
         Returns: list[str]: The search queries for the given question
         """
         try:
-            result = await self.call_agent(prompts.generate_search_queries_prompt(self.question))
+            result = await self.call_agent(prompts.generate_search_queries_prompt(self.question, self.channels))
             print(f"result = {result}", file=sys.stderr, flush=True)
             print(result)
             await self.websocket.send_json({"type": "logs", "output": f"🧠 I will conduct my research based on the following queries: {result}..."})
@@ -116,7 +116,7 @@ class ResearchAgent:
         Returns: list[str]: The async search for the given query
         """
         try:
-            search_results = json.loads(web_search(query, self.channels))
+            search_results = json.loads(web_search(query))
             new_search_urls = self.get_new_urls([url.get("href") for url in search_results])
 
             await self.websocket.send_json(

@@ -6,7 +6,7 @@ import traceback
 from duckduckgo_search import DDGS
 from config.config import Config
 
-def web_search(query: str, num_results: int = Config().num_search_queries, channels: list[str] = []) -> str:
+def web_search(query: str, num_results: int = Config().num_search_queries) -> str:
     """Useful for general internet search queries."""
     print("Searching with query {0}...".format(query))
     search_results = []
@@ -25,10 +25,9 @@ def web_search(query: str, num_results: int = Config().num_search_queries, chann
 
     total_added = 0
     for j in results:
-        if any(channel in j for channel in channels):
-            search_results.append(j)
-            total_added += 1
-            if total_added >= num_results:
-                break
+        search_results.append(j)
+        total_added += 1
+        if total_added >= num_results:
+            break
 
     return json.dumps(search_results, ensure_ascii=False, indent=4)
