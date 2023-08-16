@@ -17,7 +17,7 @@ import string
 CFG = Config()
 
 class ResearchAgent:
-    def __init__(self, question, agent, agent_role_prompt, websocket):
+    def __init__(self, question, agent, agent_role_prompt, websocket, channels):
         """ Initializes the research assistant with the given question.
         Args: question (str): The question to research
         Returns: None
@@ -31,7 +31,7 @@ class ResearchAgent:
         self.directory_name = uuid.uuid4()
         self.dir_path = os.path.dirname(f"./outputs/{self.directory_name}/")
         self.websocket = websocket
-        self.channels = [""," site:twitter.com"," site:quora.com"," site:reddit.com"," site:medium.com"," site:trustpilot.com"," site:sensortower.com"]
+        self.channels = channels
         self.progress = 0
 
     async def summarize(self, text, topic):
@@ -116,11 +116,11 @@ class ResearchAgent:
         Returns: list[str]: The async search for the given query
         """
         try:
-            search_results = json.loads(web_search(query))
+            search_results = json.loads(web_search(query, self.channels))
             new_search_urls = self.get_new_urls([url.get("href") for url in search_results])
 
             await self.websocket.send_json(
-                {"type": "logs", "output": f"🌐 Browsing the following sites for relevant information: {new_search_urls}..."})
+                {"type": "logs", "output": f"🌐 Browsing the followingsites for relevant information: {new_search_urls}..."})
 
             # Create a list to hold the coroutine objects
             tasks = [async_browse(url, query, self.websocket) for url in await new_search_urls]
