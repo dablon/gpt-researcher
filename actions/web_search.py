@@ -14,14 +14,14 @@ def web_search(query: str, num_results: int = Config().num_search_queries) -> st
     try:
         ddgs = DDGS()
         results = ddgs.text(query)
-        results = list(results)
+        if results is None:
+            return json.dumps(search_results)
+        # results = list(results)
     except AssertionError:
         traceback_str = traceback.format_exc()
         print("Ignoring error:", traceback_str)
         return json.dumps(search_results)
 
-    if results is None:
-        return json.dumps(search_results)
 
     total_added = 0
     for j in results:
