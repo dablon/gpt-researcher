@@ -3,10 +3,17 @@ asyncio==3.4.3
 beautifulsoup4
 colorama==0.4.6
 <<<<<<< HEAD
+<<<<<<< HEAD
 duckduckgo_search==4.1.1
 md2pdf==1.0.1
 playwright==1.40.0
 openai~=1.6.1
+=======
+duckduckgo_search==3.8.4
+pdfkit
+openai~=0.27.8
+playwright==1.36.0
+>>>>>>> f65e31e (added pdfkit instead of md2pdf which was based on weasyprint, should be tested prior to merging)
 python-dotenv~=1.0.0
 =======
 duckduckgo_search==3.8.5
