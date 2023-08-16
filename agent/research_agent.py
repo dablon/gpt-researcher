@@ -31,7 +31,7 @@ class ResearchAgent:
         self.directory_name = uuid.uuid4()
         self.dir_path = os.path.dirname(f"./outputs/{self.directory_name}/")
         self.websocket = websocket
-        self.channels = [" "," site:twitter.com"," site:quora.com"," site:reddit.com"," site:medium.com"," site:trustpilot.com"," site:sensortower.com "]
+        self.channels = [" site:twitter.com"," site:quora.com"," site:reddit.com"," site:medium.com"," site:trustpilot.com"," site:sensortower.com "]
         self.progress = 0
 
     async def summarize(self, text, topic):
@@ -117,9 +117,6 @@ class ResearchAgent:
         """
         try:
             queries = []
-            for channel in self.channels:
-                query = f"{channel}"
-                queries.append(query)
             search_results = json.loads(web_search(query))
             new_search_urls = self.get_new_urls([url.get("href") for url in search_results])
 
@@ -168,12 +165,14 @@ class ResearchAgent:
             if not self.research_summary:
                 search_queries = await self.create_search_queries()
                 num_queries = len(search_queries)
-                for idx, query in enumerate(search_queries, 1):
-                    await self.websocket.send_json(
-                        {"type": "logs", "output": f"💡 Research query [{idx}/{num_queries}]: {query}..."})
-                    await self.run_search_summary(query)
-                    self.progress = idx / num_queries * 100
-                    await self.websocket.send_json({"type": "progress", "progress": self.progress})
+                for query in search_queries:
+                        for channel in self.channels:
+                            idx += 1
+                            full_query = f"{query} {channel}"
+                            await self.websocket.send_json({"type": "logs", "output": f"💡 Research query [{idx}/{num_queries}]: {full_query}..."})
+                            await self.run_search_summary(full_query)
+                            self.progress = idx / num_queries * 100
+                            await self.websocket.send_json({"type": "progress", "progress": self.progress})
 
             await self.websocket.send_json(
                 {"type": "logs", "output": f"Total research words: {len(self.research_summary.split(' '))}"})
