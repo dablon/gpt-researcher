@@ -4,7 +4,7 @@ import traceback
 from duckduckgo_search import DDGS
 from config.config import Config
 
-def web_search(query: str, num_results: int = Config().num_search_queries) -> str:
+def web_search(query: str, num_results: int = Config().num_search_queries, channels: list[str] = []) -> str:
     """Useful for general internet search queries."""
     print("Searching with query {0}...".format(query))
     search_results = []
