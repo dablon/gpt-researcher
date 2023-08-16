@@ -17,7 +17,7 @@ import string
 CFG = Config()
 
 class ResearchAgent:
-    def __init__(self, question, agent, agent_role_prompt, websocket, channels):
+    def __init__(self, question, agent, agent_role_prompt, websocket):
         """ Initializes the research assistant with the given question.
         Args: question (str): The question to research
         Returns: None
@@ -31,7 +31,7 @@ class ResearchAgent:
         self.directory_name = uuid.uuid4()
         self.dir_path = os.path.dirname(f"./outputs/{self.directory_name}/")
         self.websocket = websocket
-        self.channels = channels
+        self.channels = ["site:twitter.com","site:quora.com","site:reddit.com","site:medium.com","site:trustpilot.com","site:sensortower.com"]
         self.progress = 0
 
     async def summarize(self, text, topic):
