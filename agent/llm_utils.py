@@ -185,4 +185,3 @@ def choose_agent_configuration():
     ]
     return configuration
 
-
