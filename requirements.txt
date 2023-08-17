@@ -23,6 +23,7 @@ playwright
 python-dotenv
 >>>>>>> 7e19ed6 (chore(requirements.txt): update beautifulsoup4 and duckduckgo_search versions)
 pyyaml==6.0.1
+<<<<<<< HEAD
 selenium==4.15.2
 webdriver-manager==4.0.1
 uvicorn==0.24.0.post1
@@ -38,3 +39,15 @@ PyMuPDF==1.23.6
 requests==2.31.0
 jinja2==3.1.2
 aiofiles~=23.2.1
+=======
+selenium==4.11.2
+webdriver-manager==4.0.0
+flask
+uvicorn
+pydantic
+fastapi
+python-multipart
+markdown
+langchain==0.0.263
+pdfkit
+>>>>>>> 3e1ea2e (chore(requirements.txt): add pdfkit as a new dependency)
