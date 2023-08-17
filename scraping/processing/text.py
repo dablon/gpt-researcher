@@ -7,7 +7,6 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from config import Config
 from gpt_researcher_old.retriever.llm_utils import create_chat_completion
 import os
-import pdfkit
 import markdown
 
 
