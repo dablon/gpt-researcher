@@ -1,14 +1,17 @@
 from __future__ import annotations
+from __future__ import annotations
 
 import json
 
 from fastapi import WebSocket
 import time
-from litellm import completion
+
 import openai
+from langchain.adapters import openai as lc_openai
 from colorama import Fore, Style
 from openai.error import APIError, RateLimitError
 
+from agent.prompts import auto_agent_instructions
 from config import Config
 
 CFG = Config()
