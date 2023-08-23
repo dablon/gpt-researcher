@@ -89,7 +89,7 @@ async def stream_response(model, messages, temperature, max_tokens, websocket):
     response = ""
     print(f"streaming response...")
 
-    for chunk in openai.ChatCompletion.create(
+    for chunk in lc_openai.ChatCompletion.create(
             model=model,
             messages=messages,
             temperature=temperature,
