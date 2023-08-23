@@ -17,7 +17,7 @@ import string
 CFG = Config()
 
 class ResearchAgent:
-    def __init__(self, question, agent, agent_role_prompt, websocket):
+    def __init__(self, question, agent, agent_role_prompt, language, websocket):
         """ Initializes the research assistant with the given question.
         Args: question (str): The question to research
         Returns: None
@@ -25,7 +25,8 @@ class ResearchAgent:
 
         self.question = question
         self.agent = agent
-        self.agent_role_prompt = agent_role_prompt if agent_role_prompt else prompts.generate_agent_role_prompt(agent)
+        self.language = language  # New field for language
+        self.agent_role_prompt = agent_role_prompt if agent_role_prompt else prompts.generate_agent_role_prompt(agent, self.language)
         self.visited_urls = set()
         self.research_summary = ""
         self.directory_name = uuid.uuid4()
@@ -52,6 +53,7 @@ class ResearchAgent:
             traceback.print_exc()
             await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during summarization: {str(e)}"})
             return ""
+
 
     async def get_new_urls(self, url_set_input):
         """ Gets the new urls from the given url set.
