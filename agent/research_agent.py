@@ -101,7 +101,7 @@ class ResearchAgent:
         Returns: list[str]: The search queries for the given question
         """
         try:
-            result = await self.call_agent(prompts.generate_search_queries_prompt(self.question))
+            result = await self.call_agent(prompts.generate_search_queries_prompt(self.question,self.language))
             print(f"result = {result}", file=sys.stderr, flush=True)
             print(result)
             await self.websocket.send_json({"type": "logs", "output": f"🧠 I will conduct my research based on the following queries: {result}..."})
@@ -206,7 +206,7 @@ class ResearchAgent:
             report_type_func = prompts.get_report_by_type(report_type)
             await websocket.send_json(
                 {"type": "logs", "output": f"✍️ Writing {report_type} for research task: {self.question}..."})
-            answer = await self.call_agent(report_type_func(self.question, self.research_summary), stream=True,
+            answer = await self.call_agent(report_type_func(self.question, self.research_summary, self.language), stream=True,
                                            websocket=websocket)
             file_directory = f"./outputs/{self.directory_name}"
             os.makedirs(file_directory, exist_ok=True)
