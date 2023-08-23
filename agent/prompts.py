@@ -44,11 +44,12 @@ def generate_search_queries_prompt(question, language):
     queries = [f'query {i+1}' for i in range(num_search_queries)]
     queries_str = ', '.join(queries)
 
-    return f'For the topic "{question}", list {num_search_queries} search queries in English and {num_search_queries} in {language}.'
+    return f'For the topic "{question}", list {num_search_queries} search queries in English and {num_search_queries} in {language}.'\
            f'You must respond only with a list of strings in the following json format: {queries_str}'
 
+
 def generate_property_management_report_prompt(property_name, management_summary):
-        """
+    """
     Generates the property management report prompt for the given property and management summary.
 
     Args:
@@ -59,15 +60,13 @@ def generate_property_management_report_prompt(property_name, management_summary
         str: The property management report prompt for the given property and management summary.
     """
     
-    return f'"""{management_summary}""" Based on the provided information, create a comprehensive property management report for the'\
+    return f'{management_summary} Based on the provided information, create a comprehensive property management report for the'\
            f' property "{property_name}". The report should outline the property management activities carried out, including'\
            f' rent collection, maintenance and repairs, tenant communication, lease agreements, and tenant turnover processes.'\
            f' Describe any challenges faced during property management and how they were addressed. Highlight successful'\
            f' strategies used to maintain tenant satisfaction and property value. Utilize both qualitative and quantitative data,'\
            f' such as occupancy rates, maintenance records, and tenant feedback. Ensure that the report is well-structured,'\
-           f' Write all source urls at the end of the report in apa format.'\
-           f' informative, and follows appropriate formatting. The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'
-           
+           f' informative, and follows appropriate formatting. The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'        
 def generate_network_security_assessment_prompt(network_name, research_summary):
     """
     Generates the network security assessment report prompt for the given network and research summary.
