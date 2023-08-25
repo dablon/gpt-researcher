@@ -13,6 +13,8 @@ from config import Config
 from agent import prompts
 import os
 import string
+import openai
+from openai.error import Timeout
 
 CFG = Config()
 
@@ -208,10 +210,8 @@ class ResearchAgent:
         """
         try:
             report_type_func = prompts.get_report_by_type(report_type)
-            await websocket.send_json(
-                {"type": "logs", "output": f"✍️ Writing {report_type} for research task: {self.question}..."})
-            answer = await self.call_agent(report_type_func(self.question, self.research_summary), stream=True,
-                                           websocket=websocket)
+            await websocket.send_json({"type": "logs", "output": f"✍️ Writing {report_type} for research task: {self.question}..."})
+            answer = await self.call_agent(report_type_func(self.question, self.research_summary), stream=True, websocket=websocket)
             file_directory = f"./outputs/{self.directory_name}"
             os.makedirs(file_directory, exist_ok=True)
             file_path = f"{file_directory}/research_report"
@@ -220,9 +220,12 @@ class ResearchAgent:
             self.progress = 100
             await self.websocket.send_json({"type": "progress", "progress": self.progress})
             return answer, path
+        except openai.error.Timeout as e:
+            await websocket.send_json({"type": "logs", "output": f"⚠️ Timeout occurred while generating the report: {str(e)}"})
+            return "", ""
         except Exception as e:
             traceback.print_exc()
-            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred while writing report: {str(e)}"})
+            await websocket.send_json({"type": "logs", "output": f"❌ Error occurred while writing report: {str(e)}"})
             return "", ""
 
     async def write_lessons(self):
