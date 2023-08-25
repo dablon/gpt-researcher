@@ -54,4 +54,8 @@ pdfkit
 >>>>>>> 3e1ea2e (chore(requirements.txt): add pdfkit as a new dependency)
 =======
 litellm==0.1.2291
+<<<<<<< HEAD
 >>>>>>> d55178f (adding support for Claude, Cohere and PaLM)
+=======
+urllib3
+>>>>>>> 5a9f107 (fix(web_scrape.py): handle specific exceptions when processing the URL)
