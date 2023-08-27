@@ -42,6 +42,83 @@ def generate_search_queries_prompt(question):
     return f'Write {num_search_queries} google search queries to search online that form an objective opinion from the following: "{question}"'\
            f'You must respond only with a list of strings in the following json format: {queries_str}'
 
+def generate_devops_report(research_summary, project_name):
+    return f'''
+    {research_summary}
+
+    Based on the provided information, research and create an in-depth DevOps report for the "{project_name}" initiative. This report will delve into the principles, practices, and benefits of implementing DevOps within an organization. The report aims to provide comprehensive insights to guide stakeholders in understanding and adopting DevOps effectively.
+
+    **Introduction to DevOps:**
+    The report opens with an introduction to DevOps, explaining its significance as a cultural and technical movement that bridges the gap between software development and IT operations.
+
+    **Core Principles of DevOps:**
+    Detail the core principles of DevOps, emphasizing collaboration, automation, continuous integration, and continuous delivery.
+
+    **Benefits of DevOps Implementation:**
+    Discuss the advantages that adopting a DevOps approach brings, including faster time-to-market, improved quality, enhanced collaboration, and business agility.
+
+    **DevOps Practices and Tools:**
+    Elaborate on various DevOps practices and tools, such as version control, infrastructure as code (IaC), continuous integration/continuous delivery (CI/CD) pipelines, and monitoring.
+
+    **Challenges and Considerations:**
+    Address potential challenges in DevOps adoption, including cultural shifts, automation complexities, and security concerns.
+
+    **Real-world Case Studies:**
+    Highlight successful DevOps implementation case studies, showcasing how organizations have benefited from this approach.
+
+    **Creating a DevOps Culture:**
+    Discuss how to cultivate a DevOps culture, focusing on collaboration, shared responsibility, and cross-functional teams.
+
+    **Continuous Improvement:**
+    Explain the concept of continuous improvement in DevOps, emphasizing the importance of feedback loops and data-driven decision-making.
+
+    **Best Practices for DevOps:**
+    Provide actionable best practices for effective DevOps implementation, covering areas like automation, monitoring, and communication.
+
+    **Structuring the Report:**
+    Guide readers on how the report is organized, including section titles, subsections, and their significance in conveying the information effectively.
+
+    **Documentation and Presentation:**
+    Address the importance of well-structured documentation, readability, and presentation. Emphasize the use of diagrams, charts, and visual aids.
+
+    **References and Sources:**
+    List all references and sources used in the report in APA format to acknowledge the original creators and facilitate further exploration.
+
+    **Meeting Word Count:**
+    Ensure that the report meets the specified minimum length of 1,200 words, providing detailed insights while maintaining conciseness.
+
+    **Empowering with DevOps Knowledge:**
+    The DevOps report should empower stakeholders with a comprehensive understanding of DevOps principles, practices, and benefits.
+
+    By following this structured report, readers will gain the necessary knowledge to effectively implement DevOps principles within their organization.
+    '''
+def generate_specialized_report(research_summary, project_name, section_titles, tag_name):
+    report_content = f'''
+    [{tag_name}]
+    
+    {research_summary}
+    
+    Based on the provided information, research and implement a comprehensive report for the "{project_name}" project. The report covers various aspects of the project, providing clear instructions, explanations, and best practices.
+    
+    **{section_titles[0]}**
+    {research_summary}  # Your content for the first section
+    
+    **{section_titles[1]}**
+    {research_summary}  # Your content for the second section
+    
+    ...  # Repeat for other sections
+    
+    Write all source URLs at the end of the report in APA format. The report should have a minimum length of 1,200 words and follow Markdown syntax and APA format.
+    '''
+
+    return report_content
+    # Call the function and store the generated report in a variable
+    report_content = generate_devops_report(research_summary, project_name)
+
+    # Print or manipulate the report content as needed
+    print(report_content)
+
+
 def generate_readme_report_prompt(project_name, research_summary):
     """
     Generates the README.md report prompt for the given project and research summary.
@@ -53,6 +130,7 @@ def generate_readme_report_prompt(project_name, research_summary):
     Returns:
         str: The README.md report prompt for the given project and research summary.
     """
+
 
     return f'"""{research_summary}""" Based on the provided information, research and implement a comprehensive README.md'\
            f' guide for the "{project_name}" project. The guide should provide clear instructions on how to set up'\
