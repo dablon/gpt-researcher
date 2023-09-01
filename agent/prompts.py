@@ -183,7 +183,24 @@ def generate_network_security_assessment_prompt(network_name, research_summary):
            f' Ensure that the assessment report is well-structured, informative, and follows appropriate formatting.'\
            f' Write all source urls at the end of the report in apa format.'\
            f' The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'
-           
+
+def generate_phone_number_report_prompt(phone_number):
+    """
+    Generates the report prompt for searching a phone number and gathering information.
+
+    Args:
+        phone_number (str): The phone number to search.
+
+    Returns:
+        str: The report prompt for searching a phone number.
+    """
+    return f'Based on the provided phone number "{phone_number}", conduct a comprehensive search to gather all available information. '\
+           f'Include details such as the owner\'s name, address, email, social media profiles, and any other relevant information. '\
+           f'Utilize online directories, social media platforms, public records, and any other reliable sources to gather the information. '\
+           f'The report should be well-structured, informative, and include all relevant details found during the search. '\
+           f'Ensure that all gathered information is accurate and up-to-date. Write the report in a minimum of 1,200 words and with markdown syntax and apa format. '\
+           f'Include all used URLs and references in APA format at the end of the report.'
+
 def generate_architecture_report_prompt(software_name, research_summary):
     """
     Generates the architecture report prompt for the given software and research summary.
@@ -353,6 +370,8 @@ def get_report_by_type(report_type):
     report_type_mapping = {
         'research_report': generate_report_prompt,
         'generate_readme': generate_readme_report_prompt,
+        'generate_devops_report': generate_devops_report,
+        'generate_phone_number_report_prompt': generate_phone_number_report_prompt,
         'resource_report': generate_resource_report_prompt,
         'ux_report': generate_ux_report_prompt,
         'risk_report': generate_risk_assessment_report_prompt,
