@@ -28,8 +28,8 @@ def generate_report_prompt(question, research_summary):
            f' question or topic: "{question}" in a detailed report --'\
            " The report should focus on the answer to the question, should be well structured, informative," \
            " in depth, with facts and numbers if available, a minimum of 1,200 words and with markdown syntax and apa format. "\
-            "You MUST determine your own concrete and valid opinion based on the information found. Do NOT deter to general and meaningless conclusions." \
-           "Write all source urls at the end of the report in apa format"
+            "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
+           "Write all used source urls at the end of the report in apa format"
 
 def generate_search_queries_prompt(question):
     """ Generates the search queries prompt for the given question.
@@ -183,7 +183,29 @@ def generate_network_security_assessment_prompt(network_name, research_summary):
            f' Ensure that the assessment report is well-structured, informative, and follows appropriate formatting.'\
            f' Write all source urls at the end of the report in apa format.'\
            f' The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'
-           
+
+def generate_phone_number_report_prompt(question, research_summary):
+    """
+    Generates the phone number report prompt for the given question and research summary.
+
+    Args:
+        question (str): The question to generate the report prompt for.
+        research_summary (str): The research summary to generate the report prompt for.
+
+    Returns:
+        str: The phone number report prompt for the given question and research summary.
+    """
+    return f'Based on the provided phone number "{question}", conduct a comprehensive search to gather all available information. '\
+           f'Your objective is to investigate the phone number for potential associations with criminal activities. '\
+           f'Include details such as the owner\'s name, address, email, social media profiles, and any other relevant information. '\
+           f'Utilize online directories, social media platforms, public records, and any other reliable sources to gather the information. '\
+           f'Pay close attention to any indications or connections that might suggest involvement in criminal behavior, such as records of arrests, court cases, or suspicious online activities. '\
+           f'Evaluate the credibility of the sources and cross-reference the information to ensure its accuracy and reliability. '\
+           f'The report should be well-structured, informative, and include all relevant details found during the search. '\
+           f'Highlight any potential red flags or criminal associations discovered during the investigation. '\
+           f'Ensure that all gathered information is accurate and up-to-date. Write the report in a minimum of 1,200 words with markdown syntax and APA format. '\
+           f'Include all used URLs and references in APA format at the end of the report.'
+
 def generate_architecture_report_prompt(software_name, research_summary):
     """
     Generates the architecture report prompt for the given software and research summary.
@@ -353,6 +375,8 @@ def get_report_by_type(report_type):
     report_type_mapping = {
         'research_report': generate_report_prompt,
         'generate_readme': generate_readme_report_prompt,
+        'generate_devops_report': generate_devops_report,
+        'generate_phone_number_report_prompt': generate_phone_number_report_prompt,
         'resource_report': generate_resource_report_prompt,
         'ux_report': generate_ux_report_prompt,
         'risk_report': generate_risk_assessment_report_prompt,
