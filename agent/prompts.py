@@ -196,10 +196,14 @@ def generate_phone_number_report_prompt(question, research_summary):
         str: The phone number report prompt for the given question and research summary.
     """
     return f'Based on the provided phone number "{question}", conduct a comprehensive search to gather all available information. '\
+           f'Your objective is to investigate the phone number for potential associations with criminal activities. '\
            f'Include details such as the owner\'s name, address, email, social media profiles, and any other relevant information. '\
            f'Utilize online directories, social media platforms, public records, and any other reliable sources to gather the information. '\
+           f'Pay close attention to any indications or connections that might suggest involvement in criminal behavior, such as records of arrests, court cases, or suspicious online activities. '\
+           f'Evaluate the credibility of the sources and cross-reference the information to ensure its accuracy and reliability. '\
            f'The report should be well-structured, informative, and include all relevant details found during the search. '\
-           f'Ensure that all gathered information is accurate and up-to-date. Write the report in a minimum of 1,200 words and with markdown syntax and apa format. '\
+           f'Highlight any potential red flags or criminal associations discovered during the investigation. '\
+           f'Ensure that all gathered information is accurate and up-to-date. Write the report in a minimum of 1,200 words with markdown syntax and APA format. '\
            f'Include all used URLs and references in APA format at the end of the report.'
 
 def generate_architecture_report_prompt(software_name, research_summary):
