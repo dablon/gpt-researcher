@@ -184,17 +184,18 @@ def generate_network_security_assessment_prompt(network_name, research_summary):
            f' Write all source urls at the end of the report in apa format.'\
            f' The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'
 
-def generate_phone_number_report_prompt(phone_number):
+def generate_phone_number_report_prompt(question, research_summary):
     """
-    Generates the report prompt for searching a phone number and gathering information.
+    Generates the phone number report prompt for the given question and research summary.
 
     Args:
-        phone_number (str): The phone number to search.
+        question (str): The question to generate the report prompt for.
+        research_summary (str): The research summary to generate the report prompt for.
 
     Returns:
-        str: The report prompt for searching a phone number.
+        str: The phone number report prompt for the given question and research summary.
     """
-    return f'Based on the provided phone number "{phone_number}", conduct a comprehensive search to gather all available information. '\
+    return f'Based on the provided phone number "{question}", conduct a comprehensive search to gather all available information. '\
            f'Include details such as the owner\'s name, address, email, social media profiles, and any other relevant information. '\
            f'Utilize online directories, social media platforms, public records, and any other reliable sources to gather the information. '\
            f'The report should be well-structured, informative, and include all relevant details found during the search. '\
