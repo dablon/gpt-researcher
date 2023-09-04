@@ -4,17 +4,22 @@ import traceback
 from duckduckgo_search import DDGS
 from config.config import Config
 
-ddgs = DDGS()
 
 def web_search(query: str, num_results: int = Config().num_search_queries) -> str:
-    """Useful for general internet search queries."""
     print("Searching with query {0}...".format(query))
     search_results = []
 
     try:
+        ddgs = DDGS()
         results = ddgs.text(query)
         if results is None:
             return json.dumps(search_results)
+        elif isinstance(results, str) and results.startswith("Error"):
+            return json.dumps(search_results)
+            
+        # Check if "vqd" is empty or None
+        if not ddgs.vqd:
+            raise AssertionError("Error in getting vqd")
     except AssertionError as e:
         traceback_str = traceback.format_exc()
         print("Ignoring error:", traceback_str)
