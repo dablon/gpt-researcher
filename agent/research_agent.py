@@ -131,6 +131,10 @@ class ResearchAgent:
             responses = await asyncio.gather(*tasks, return_exceptions=True)
 
             return responses
+        except AssertionError as e:
+            traceback.print_exc()
+            await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during async search: {str(e)}"})
+            return []
         except Exception as e:
             traceback.print_exc()
             await self.websocket.send_json({"type": "logs", "output": f"❌ Error occurred during async search: {str(e)}"})
