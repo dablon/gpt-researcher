@@ -184,6 +184,27 @@ def generate_network_security_assessment_prompt(network_name, research_summary):
            f' Write all source urls at the end of the report in apa format.'\
            f' The report should have a minimum length of 1,200 words and with markdown syntax and apa format.'
 
+def generar_prompt_informe_denuncia(pregunta, resumen_investigacion):
+    """
+    Genera un prompt de informe de denuncia basado en la pregunta y el resumen de investigación proporcionados.
+
+    Args:
+        pregunta (str): La pregunta o descripción del incidente para generar el prompt del informe.
+        resumen_investigacion (str): Un resumen de la investigación o detalles del incidente.
+
+    Returns:
+        str: El prompt de informe de denuncia para la pregunta y el resumen de investigación proporcionados.
+    """
+    return f'Reporte el incidente descrito en la siguiente pregunta: "{pregunta}". '\
+           f'Basándose en el resumen de investigación proporcionado, realice una investigación exhaustiva para recopilar toda la información disponible sobre el incidente. '\
+           f'Incluya detalles como la fecha del incidente, la ubicación, las personas involucradas, las acciones tomadas y cualquier testigo. '\
+           f'Mencione las pérdidas económicas sufridas, describiendo las cantidades y los elementos perdidos, si corresponde. '\
+           f'Además, detalle cualquier perjuicio, ya sea físico o emocional, que haya experimentado como resultado del incidente. '\
+           f'El informe debe estar bien estructurado y ser informativo, con una narración completa de los hechos. '\
+           f'Asegúrese de que toda la información recopilada sea precisa y esté respaldada con evidencia adecuada. '\
+           f'Escriba el informe en un mínimo de 1,200 palabras utilizando formato de markdown y APA. '\
+           f'Incluya todos los URL y referencias utilizados en formato APA al final del informe.'
+
 def generate_phone_number_report_prompt(question, research_summary):
     """
     Generates the phone number report prompt for the given question and research summary.
@@ -377,6 +398,7 @@ def get_report_by_type(report_type):
         'generate_readme': generate_readme_report_prompt,
         'generate_devops_report': generate_devops_report,
         'generate_phone_number_report_prompt': generate_phone_number_report_prompt,
+        'informe_denuncia': generar_prompt_informe_denuncia,
         'resource_report': generate_resource_report_prompt,
         'ux_report': generate_ux_report_prompt,
         'risk_report': generate_risk_assessment_report_prompt,
