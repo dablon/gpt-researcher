@@ -19,3 +19,4 @@ markdown
 langchain==0.0.275
 litellm==0.1.2291
 urllib3
+chromedriver-autoinstaller

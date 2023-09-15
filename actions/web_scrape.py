@@ -20,6 +20,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from fastapi import WebSocket
 import urllib3
 from urllib3.exceptions import ReadTimeoutError
+import chromedriver_autoinstaller
 import processing.text as summary
 from config import Config
 from processing.html import extract_hyperlinks, format_hyperlinks
@@ -31,6 +32,7 @@ executor = ThreadPoolExecutor()
 FILE_DIR = Path(__file__).parent.parent
 CFG = Config()
 MAX_RETRIES = 3
+chromedriver_autoinstaller.install() #Installs the latest compat version of chromedriver
 
 async def async_browse(url: str, question: str, websocket: WebSocket) -> str:
     """Browse a website and return the answer and links to the user
