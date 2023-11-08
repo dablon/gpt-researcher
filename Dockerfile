@@ -4,6 +4,12 @@ RUN apt-get update \
     && apt-get install -y chromium chromium-driver \
     && chromium --version && chromedriver --version
 
+RUN apt-get install -y firefox-esr wget \
+    && wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz \
+    && tar -xvzf geckodriver* \
+    && chmod +x geckodriver \
+    && mv geckodriver /usr/local/bin/
+
 FROM install-browser as gpt-researcher-install
 
 ENV PIP_ROOT_USER_ACTION=ignore
