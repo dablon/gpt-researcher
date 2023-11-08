@@ -153,28 +153,28 @@ def scrape_text_with_selenium(url: str) -> tuple[WebDriver, str]:
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
 
-    # check if url is a pdf or arxiv link
-    if url.endswith(".pdf"):
-        text = scrape_pdf_with_pymupdf(url)
-    elif "arxiv" in url:
-        # parse the document number from the url
-        doc_num = url.split("/")[-1]
-        text = scrape_pdf_with_arxiv(doc_num)
-    else:
-        # Get the HTML content directly from the browser's DOM
-        page_source = driver.execute_script("return document.body.outerHTML;")
-        soup = BeautifulSoup(page_source, "html.parser")
+        # check if url is a pdf or arxiv link
+        if url.endswith(".pdf"):
+            text = scrape_pdf_with_pymupdf(url)
+        elif "arxiv" in url:
+            # parse the document number from the url
+            doc_num = url.split("/")[-1]
+            text = scrape_pdf_with_arxiv(doc_num)
+        else:
+            # Get the HTML content directly from the browser's DOM
+            page_source = driver.execute_script("return document.body.outerHTML;")
+            soup = BeautifulSoup(page_source, "html.parser")
 
-        for script in soup(["script", "style"]):
-            script.extract()
+            for script in soup(["script", "style"]):
+                script.extract()
 
-        # text = soup.get_text()
-        text = get_text(soup)
+            # text = soup.get_text()
+            text = get_text(soup)
 
-        lines = (line.strip() for line in text.splitlines())
-        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        text = "\n".join(chunk for chunk in chunks if chunk)
-        return driver, text
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            text = "\n".join(chunk for chunk in chunks if chunk)
+            return driver, text
     except Exception as e:
         error_trace = traceback.format_exc()
         print(f"An error occurred scrape_text_with_selenium {url}: {e}")
@@ -268,4 +268,8 @@ def scrape_pdf_with_arxiv(query) -> str:
     """
     retriever = ArxivRetriever(load_max_docs=2, doc_content_chars_max=None)
     docs = retriever.get_relevant_documents(query=query)
+<<<<<<< HEAD
     return docs[0].page_content
+=======
+    return docs[0].page_content
+>>>>>>> 98656e70951a5e579f8f254da54aa3796a783b2e

@@ -6,8 +6,14 @@ from duckduckgo_search import DDGS
 from tavily import TavilyClient
 from langchain.utilities import SearxSearchWrapper
 from config import Config
+<<<<<<< HEAD
 
 CFG = Config()
+=======
+
+CFG = Config()
+
+>>>>>>> 98656e70951a5e579f8f254da54aa3796a783b2e
 
 
 def web_search(query: str, num_results: int = Config().num_search_queries) -> str:

@@ -40,6 +40,11 @@ class ResearchAgent:
             return print(output)
         await self.websocket.send_json({"type": "logs", "output": output})
 
+    async def stream_output(self, output):
+        if not self.websocket:
+            return print(output)
+        await self.websocket.send_json({"type": "logs", "output": output})
+
 
     async def summarize(self, text, topic):
         """ Summarizes the given text for the given topic.
@@ -48,7 +53,7 @@ class ResearchAgent:
         Returns: str: The summarized text
         """
         messages = [create_message(text, topic)]
-        await self.websocket.send_json({"type": "logs", "output": f"📝 Summarizing text for query: {text}"})
+        await self.stream_output(f"📝 Summarizing text for query: {text}")
 
         messages = [create_message(text, topic)]
         await self.stream_output(f"📝 Summarizing text for query: {text}")
@@ -66,7 +71,8 @@ class ResearchAgent:
         new_urls = []
         for url in url_set_input:
             if url not in self.visited_urls:
-                await self.websocket.send_json({"type": "logs", "output": f"✅ Adding source url to research: {url}\n"})
+                await self.stream_output(f"✅ Adding source url to research: {url}\n")
+
                 self.visited_urls.add(url)
                 new_urls.append(url)
 
@@ -168,6 +174,7 @@ class ResearchAgent:
         """
         try:
             self.research_summary = read_txt_files(self.dir_path) if os.path.isdir(self.dir_path) else ""
+
             if not self.research_summary:
                 search_queries = await self.create_search_queries()
                 for query in search_queries:
@@ -175,6 +182,7 @@ class ResearchAgent:
                     self.research_summary += f"{research_result}\n\n"
 
             await self.stream_output(f"Total research words: {len(self.research_summary.split(' '))}")
+
             return self.research_summary
 
         except Exception as e:
@@ -189,7 +197,6 @@ class ResearchAgent:
         """
         try:
             result = self.call_agent(prompts.generate_concepts_prompt(self.question, self.research_summary))
-
             await self.stream_output(f"I will research based on the following concepts: {result}\n")
             return json.loads(result)
         except Exception as e:
@@ -213,7 +220,6 @@ class ResearchAgent:
             final_report = await answer if websocket else answer
 
             path = await write_md_to_pdf(report_type, self.dir_path, final_report)
-
             return answer, path
         except openai.error.Timeout as e:
             await websocket.send_json({"type": "logs", "output": f"⚠️ Timeout occurred while generating the report: {str(e)}"})
