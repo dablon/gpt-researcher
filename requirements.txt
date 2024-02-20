@@ -2,28 +2,12 @@
 asyncio==3.4.3
 beautifulsoup4
 colorama==0.4.6
-<<<<<<< HEAD
-<<<<<<< HEAD
-duckduckgo_search==4.1.1
-md2pdf==1.0.1
-playwright==1.40.0
-openai~=1.6.1
-=======
-duckduckgo_search==3.8.4
-pdfkit
-openai~=0.27.8
-playwright==1.36.0
->>>>>>> f65e31e (added pdfkit instead of md2pdf which was based on weasyprint, should be tested prior to merging)
-python-dotenv~=1.0.0
-=======
 duckduckgo_search==3.8.5
 md2pdf==1.0.1
 openai
 playwright
 python-dotenv
->>>>>>> 7e19ed6 (chore(requirements.txt): update beautifulsoup4 and duckduckgo_search versions)
 pyyaml==6.0.1
-<<<<<<< HEAD
 selenium==4.15.2
 webdriver-manager==4.0.1
 uvicorn==0.24.0.post1
@@ -39,23 +23,3 @@ PyMuPDF==1.23.6
 requests==2.31.0
 jinja2==3.1.2
 aiofiles~=23.2.1
-=======
-selenium==4.11.2
-webdriver-manager==4.0.0
-flask
-uvicorn
-pydantic
-fastapi
-python-multipart
-markdown
-<<<<<<< HEAD
-langchain==0.0.263
-pdfkit
->>>>>>> 3e1ea2e (chore(requirements.txt): add pdfkit as a new dependency)
-=======
-litellm==0.1.2291
-<<<<<<< HEAD
->>>>>>> d55178f (adding support for Claude, Cohere and PaLM)
-=======
-urllib3
->>>>>>> 5a9f107 (fix(web_scrape.py): handle specific exceptions when processing the URL)
