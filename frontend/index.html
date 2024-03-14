@@ -3,7 +3,7 @@
 
 <head>
     <title>GPT Researcher</title>
-    <meta name="description" content="A research assistant powered by GPT-4">
+    <meta name="description" content="A versatile research assistant powered by GPT-4">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./static/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,28 +41,21 @@
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 20px;
+            font-family: courier, monospace;
+            white-space: pre-wrap;
         }
     </style>
 </head>
 
 <body>
 
-
 <main class="container" id="form">
-    <div class="agent-item"><img src="/static/defaultAgentAvatar.JPG" class="avatar"
-                                                alt="Auto Agent"></div>
+    <div class="agent-item"><img src="/static/defaultAgentAvatar.JPG" class="avatar" alt="Auto Agent"></div>
     <form method="POST" class="mt-3" onsubmit="GPTResearcher.startResearch(); return false;">
         <div class="form-group">
             <label for="task" class="agent-question">What would you like me to research next?</label>
             <input type="text" id="task" name="task" class="form-control" required>
             <input type="radio" name="agent" id="autoAgent" value="Auto Agent" checked hidden>
-        </div>
-        <div class="form-group">
-            <div class="row">
-
-
-            </div>
-            <button type="button" id="btnShowAuto" class="btn btn-secondary mt-3 btn-show">Auto Agent</button>
         </div>
         <div class="form-group">
             <label for="report_type" class="agent-question">What type of report would you like me to generate?</label>
@@ -78,18 +71,26 @@
                 <option value="outline_report">Outline Report</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="report_format" class="agent-question">Select the report format:</label>
+            <select name="report_format" id="report_format" class="form-control">
+                <option value="markdown">Markdown</option>
+                <option value="apa">APA</option>
+                <option value="yaml">YAML</option>
+                <option value="html">HTML</option>
+            </select>
+        </div>
         <input type="submit" value="Research" class="btn btn-primary button-padding">
     </form>
 
     <div class="margin-div">
         <h2>Agent Output</h2>
-        <p class="mt-2 text-left" style="font-size: 0.8rem;">An agent tailored specifically to your task
-                        will be generated to provide the most precise and relevant research results.</p>
+        <p class="mt-2 text-left" style="font-size: 0.8rem;">An agent tailored specifically to your task will be generated to provide the most precise and relevant research results.</p>
         <div id="output"></div>
     </div>
     <div class="margin-div">
         <h2>Research Report</h2>
-        <div id="reportContainer"  class="markdown-body"></div>
+        <div id="reportContainer"></div>
         <div id="reportActions">
             <div class="alert alert-info" role="alert" id="status"></div>
             <button id="copyToClipboard" class="btn btn-secondary mt-3" style="margin-right: 10px;">Copy to clipboard</button>
@@ -99,33 +100,37 @@
 </main>
 
 <footer>
-    <p>GPT Researcher &copy; 2024 | <a target="_blank" href="https://github.com/dablon/gpt-researcher/">GitHub
-        Page</a></p>
+    <p>GPT Researcher &copy; 2024 | <a target="_blank" href="https://github.com/dablon/gpt-researcher/">GitHub Page</a></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 <script src="/site/scripts.js"></script>
 <script>
-    // const btnChoose = document.getElementById('btnChoose');
-    const btnShowAuto = document.getElementById('btnShowAuto');
-    const autoAgentDiv = document.getElementById('autoAgentDiv');
-    const agentChoices = document.getElementsByClassName('agent-choices');
-
-    btnShowAuto.addEventListener('click', function () {
-        btnShowAuto.style.display = 'none';
-        btnChoose.style.display = 'inline-block';
-        autoAgentDiv.style.display = 'flex';
-        agentChoices[0].style.display = 'none';
-    });
-</script>
-</body>
-
-</html>
-<script>
-    function displayResearchReport(report) {
+    function displayResearchReport(report, format) {
         const container = document.getElementById('reportContainer');
-        container.innerHTML = `<div class="report-content">${marked(report)}</div>`;
+        let formattedReport;
+        switch (format) {
+            case 'markdown':
+                formattedReport = `<div class="markdown-body">${marked(report)}</div>`;
+                break;
+            case 'apa':
+                // Assume that the `report` variable contains APA formatted text;
+                formattedReport = `<div class="report-content">${marked(report)}</div>`;
+                break;
+            case 'yaml':
+                const converter = new showdown.Converter();
+                const yamlHtml = converter.makeHtml(report);
+                formattedReport = `<div class="report-content">${yamlHtml}</div>`;
+                break;
+            case 'html':
+                // Directly display HTML formatted report;
+                formattedReport = report;
+                break;
+            default:
+                formattedReport = `<div class="report-content">Format not supported.</div>`;
+        }
+        container.innerHTML = formattedReport;
         document.getElementById('output').innerHTML = '';
         document.getElementById('status').innerHTML = '';
         document.getElementById('copyToClipboard').style.display = 'inline-block';
@@ -134,3 +139,6 @@
         document.getElementById('downloadLink').setAttribute('download', 'research_report.txt');
     }
 </script>
+</body>
+
+</html>
