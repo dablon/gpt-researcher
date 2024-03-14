@@ -85,6 +85,30 @@ def generate_software_architecture_report_prompt(question, context, report_forma
             'Conclude with a clear and well-justified recommendation for the software architecture that best meets' \
             ' the requirements of the given scenario.'
 
+def generate_market_analysis_report_prompt(question, context, report_format="apa", total_words=1200):
+    """Generates the market analysis report prompt for a given question and context related to market trends or business research.
+
+    Args:
+        question (str): The business or market analysis question to generate the report prompt for.
+        context (str): The market or business context to generate the report prompt for.
+
+    Returns:
+        str: The market analysis report prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided business or market context, create a detailed market analysis report' \
+           f' addressing the question: "{question}". The report should offer an in-depth examination of relevant market' \
+           ' trends, consumer behavior, competitor strategies, and potential growth opportunities.\n' \
+           'Your analysis should identify key drivers affecting the market, evaluate strengths and weaknesses of major' \
+           ' competitors, and assess the market demand for the product or service in question. Include an analysis of' \
+           ' external factors using frameworks like PESTLE (Political, Economic, Social, Technological, Legal, Environmental)' \
+           ' where applicable.\n' \
+           'The report must be structured logically, with sections including but not limited to market overview, competitor' \
+           ' analysis, SWOT analysis, consumer analysis, and recommendations for strategic actions. Data and insights should be' \
+           ' supported by recent studies, surveys, and credible sources.\n' \
+           'Adhere to the specified report format ('f'{report_format}) and ensure proper citation of all referenced sources.' \
+           f' The report is expected to be well-researched, analytical, and at least {total_words} words in length, catering to' \
+           ' business professionals.\n' \
+            'Conclude with actionable insights and strategic recommendations based on your findings.'
 
 def generate_report_prompt(question, context, report_format="apa", total_words=1000):
     """ Generates the report prompt for the given question and research summary.
@@ -154,6 +178,7 @@ def get_report_by_type(report_type):
         'readme_report': generate_readme_report_prompt,
         'medical_report': generate_medical_research_report_prompt,
         'architecture_report': generate_software_architecture_report_prompt,
+        'market_report': generate_market_analysis_report_prompt,
         'resource_report': generate_resource_report_prompt,
         'outline_report': generate_outline_report_prompt,
         'custom_report': generate_custom_report_prompt

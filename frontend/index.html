@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/site/styles.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/marked/marked.min.css">
     <style>
         .avatar {
             width: 60px;
@@ -34,6 +35,12 @@
 
         .btn-show {
             display: none;
+        }
+
+        .report-content {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -83,17 +90,18 @@
         <div id="reportContainer"></div>
         <div id="reportActions">
             <div class="alert alert-info" role="alert" id="status"></div>
-            <a id="copyToClipboard" onclick="GPTResearcher.copyToClipboard()" class="btn btn-secondary mt-3" style="margin-right: 10px;">Copy to clipboard</a>
+            <button id="copyToClipboard" class="btn btn-secondary mt-3" style="margin-right: 10px;">Copy to clipboard</button>
             <a id="downloadLink" href="#" class="btn btn-secondary mt-3" target="_blank">Download as PDF</a>
         </div>
     </div>
 </main>
 
 <footer>
-    <p>GPT Researcher &copy; 2023 | <a target="_blank" href="https://github.com/assafelovic/gpt-researcher">GitHub
+    <p>GPT Researcher &copy; 2024 | <a target="_blank" href="https://github.com/dablon/gpt-researcher/">GitHub
         Page</a></p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 <script src="/site/scripts.js"></script>
 <script>
@@ -112,3 +120,15 @@
 </body>
 
 </html>
+<script>
+    function displayResearchReport(report) {
+        const container = document.getElementById('reportContainer');
+        container.innerHTML = `<div class="report-content">${marked(report)}</div>`;
+        document.getElementById('output').innerHTML = '';
+        document.getElementById('status').innerHTML = '';
+        document.getElementById('copyToClipboard').style.display = 'inline-block';
+        document.getElementById('downloadLink').style.display = 'inline-block';
+        document.getElementById('downloadLink').href = 'data:application/octet-stream,' + encodeURIComponent(report);
+        document.getElementById('downloadLink').setAttribute('download', 'research_report.txt');
+    }
+</script>
