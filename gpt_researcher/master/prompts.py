@@ -37,7 +37,61 @@ def generate_readme_report_prompt(question, context, report_format="markdown", t
            ' the software.\n' \
             'Proofread and edit the README file to ensure accuracy and clarity.'
 
-def generate_gitlab_ci_yml_prompt(question, context, report_format="markdown", total_words=2000):
+def generate_code_printer_prompt(question, context, report_format="plaintext", total_words=500):
+    """Generates the code printer prompt for a given question and context.
+
+    Args:
+        question (str): The question or topic to generate the prompt for.
+        context (str): The context or description related to the code printing process.
+        report_format (str, optional): The desired format of the code printing prompt (plaintext by default).
+        total_words (int, optional): The desired length of the code printing prompt in words (500 by default).
+
+    Returns:
+        str: The code printing prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, write a code snippet that demonstrates the process of' \
+           f' building the application for the following question or topic: "{question}". The code snippet should' \
+           f' showcase the necessary steps and commands for building the application.\n' \
+           f'Write comments or descriptions within the code to explain each step of the building process. Focus on' \
+           f' the essential code logic and leave out any lengthy or repetitive parts.\n' \
+           f'Ensure that the code snippet is concise, well-structured, and easy to understand. Use appropriate' \
+           f' programming language syntax and follow best practices for readability and maintainability.\n\n' \
+           f'The resulting code snippet should demonstrate the process of building the application and show how' \
+           f' different components or resources are utilized in the build process.\n\n' \
+           f'The code snippet should be provided in {report_format} format and should have a minimum length of' \
+           f' {total_words} words.'
+
+def generate_code_builder_prompt(question, context, report_format="markdown", total_words=5000):
+    """Generates the code building prompt for a given question and context.
+
+    Args:
+        question (str): The question or topic to generate the prompt for.
+        context (str): The context or description related to the code building process.
+        report_format (str, optional): The desired format of the code building prompt (markdown by default).
+        total_words (int, optional): The desired length of the code building prompt in words (2000 by default).
+
+    Returns:
+        str: The code building prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, generate a code building process for the following' \
+           f' question or topic: "{question}". The code building process should ensure the successful compilation,' \
+           f' testing, and packaging of the codebase.\n' \
+           f'Describe the necessary steps and tools required for building the codebase. This may include compiling' \
+           f' source code, managing dependencies, running static analysis, executing unit tests, and generating' \
+           f' build artifacts. Consider incorporating build automation tools or frameworks like Make, Gradle, or Maven.\n' \
+           f'Maintain a clean and organized code structure, utilize version control best practices, and ensure consistent' \
+           f' coding standards during the building process. Document any required configuration files or scripts that' \
+           f' need to be created or modified while building the code.\n' \
+           f'Discuss the build environment, including the choice of operating system, libraries, and libraries, if relevant' \
+           f' for the project. Address any necessary dependencies, including software frameworks, libraries,' \
+           f' or other external resources.\n' \
+           f'Document any necessary prerequisites or requirements for building the code, such as development tools,' \
+           f' compilers, or virtualization software.\n\n' \
+           f'The resulting code building process should be reliable, efficient, and well-documented to ensure the' \
+           f' successful compilation, testing, and packaging of the codebase.\n\n' \
+           f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
+
+def generate_gitlab_ci_yml_prompt(question, context, report_format="yaml", total_words=2000):
     """Generates the GitLab CI/CD pipeline YAML builder prompt for a given question and context.
 
     Args:
@@ -65,7 +119,7 @@ def generate_gitlab_ci_yml_prompt(question, context, report_format="markdown", t
            f' your project, enhancing efficiency and reliability in software delivery.\n\n' \
            f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
 
-def generate_azure_devops_yaml_prompt(question, context, report_format="markdown", total_words=2000):
+def generate_azure_devops_yaml_prompt(question, context, report_format="yaml", total_words=2000):
     """Generates the Azure DevOps YAML pipeline builder prompt for a given question and context.
 
     Args:
