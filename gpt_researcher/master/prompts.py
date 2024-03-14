@@ -61,35 +61,6 @@ def generate_code_printer_prompt(question, context, report_format="plaintext", t
            f'The code snippet should be provided in {report_format} format and should have a minimum length of' \
            f' {total_words} words.'
 
-def generate_code_builder_prompt(question, context, report_format="markdown", total_words=5000):
-    """Generates the code building prompt for a given question and context.
-
-    Args:
-        question (str): The question or topic to generate the prompt for.
-        context (str): The context or description related to the code building process.
-        report_format (str, optional): The desired format of the code building prompt (markdown by default).
-        total_words (int, optional): The desired length of the code building prompt in words (2000 by default).
-
-    Returns:
-        str: The code building prompt for the given question and context.
-    """
-    return f'"""{context}"""\n\nBased on the provided context, generate a code building process for the following' \
-           f' question or topic: "{question}". The code building process should ensure the successful compilation,' \
-           f' testing, and packaging of the codebase.\n' \
-           f'Describe the necessary steps and tools required for building the codebase. This may include compiling' \
-           f' source code, managing dependencies, running static analysis, executing unit tests, and generating' \
-           f' build artifacts. Consider incorporating build automation tools or frameworks like Make, Gradle, or Maven.\n' \
-           f'Maintain a clean and organized code structure, utilize version control best practices, and ensure consistent' \
-           f' coding standards during the building process. Document any required configuration files or scripts that' \
-           f' need to be created or modified while building the code.\n' \
-           f'Discuss the build environment, including the choice of operating system, libraries, and libraries, if relevant' \
-           f' for the project. Address any necessary dependencies, including software frameworks, libraries,' \
-           f' or other external resources.\n' \
-           f'Document any necessary prerequisites or requirements for building the code, such as development tools,' \
-           f' compilers, or virtualization software.\n\n' \
-           f'The resulting code building process should be reliable, efficient, and well-documented to ensure the' \
-           f' successful compilation, testing, and packaging of the codebase.\n\n' \
-           f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
 
 def generate_gitlab_ci_yml_prompt(question, context, report_format="yaml", total_words=2000):
     """Generates the GitLab CI/CD pipeline YAML builder prompt for a given question and context.
@@ -118,6 +89,107 @@ def generate_gitlab_ci_yml_prompt(question, context, report_format="yaml", total
            f'The resulting GitLab CI/CD pipeline YAML file should automate the build, test, and deployment processes for' \
            f' your project, enhancing efficiency and reliability in software delivery.\n\n' \
            f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
+
+def generate_bash_script_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for creating a Bash script with proper comments, color-coding, error handling, functions, and best practices.
+
+    Args:
+        question (str): The prompt question to generate the script for.
+        context (str): Context or description related to the script.
+        total_words (int, optional): The desired total word count for the script prompt.
+
+    Returns:
+        str: Bash script prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design a Bash script that addresses the following question or task:' \
+           f' "{question}". The script should be well-documented with proper comments, adhere to best coding practices,' \
+           f' and incorporate features such as color-coded output, error handling, and structured functions.\n' \
+           f'When creating the script, ensure that the output is formatted for readability and includes color-coding to' \
+           f' highlight important information, errors, warnings, and success messages.\n' \
+           f'Implement robust error handling mechanisms to gracefully manage issues that may arise during script execution,' \
+           f' providing clear messages to users for troubleshooting and debugging.\n' \
+           f'Organize the script into reusable functions to modularize the code and promote maintainability and' \
+           f' readability. Encourage code reuse by utilizing functions for common tasks or processes.\n' \
+           f'Adhere to bash scripting best practices regarding variable usage, quoting, script structure, and efficiency' \
+           f' optimizations. Use appropriate shell scripting constructs and avoid common pitfalls in bash programming.\n' \
+           f'Include header comments detailing the script name, purpose, author, version, and license information. Document' \
+           f' the scripts usage, input parameters, and any dependencies required for proper execution.\n' \
+           f'The script should be concise, efficient, and well-organized, promoting clarity and maintainability. Aim for a' \
+           f'The script should be written in {report_format} format and have a minimum length of {total_words} words.'\
+
+def generate_powershell_script_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for creating a PowerShell script with proper comments, error handling, functions, and best practices.
+
+    Args:
+        question (str): The prompt question to generate the script for.
+        context (str): Context or description related to the script.
+        total_words (int, optional): The desired total word count for the script prompt.
+
+    Returns:
+        str: PowerShell script prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design a PowerShell script that addresses the following question or task:' \
+           f' "{question}". The script should be well-documented with proper comments, adhere to best coding practices,' \
+           f' and incorporate error handling, structured functions, and PowerShell specific features.\n' \
+           f'When creating the script, ensure that the output is formatted for readability and includes error handling to' \
+           f' gracefully handle any issues that may occur during script execution.\n' \
+           f'Organize the script into reusable functions to modularize the code and promote maintainability and readability.' \
+           f' Encourage code reuse by utilizing functions for common tasks or processes.\n' \
+           f'Adhere to PowerShell scripting best practices, such as using appropriate cmdlets, proper variable usage,' \
+           f' error handling, script structure, and efficiency optimizations. Avoid common pitfalls in PowerShell scripting.\n' \
+           f'Include header comments detailing the script name, purpose, author, version, and license information. Document' \
+           f' the scripts usage, input parameters, and any dependencies required for proper execution.\n' \
+           f'The script should be concise, efficient, and well-organized, promoting clarity and maintainability. Aim for a' \
+           f'The script should be written in {report_format} format and have a minimum length of {total_words} words.'\
+
+def generate_python_script_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for creating a Python script with proper comments, error handling, functions, best practices, and requirements.txt.
+
+    Args:
+        question (str): The prompt question to generate the script for.
+        context (str): Context or description related to the script.
+        total_words (int, optional): The desired total word count for the script prompt.
+
+    Returns:
+        str: Python script prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design a Python script that addresses the following question or task:' \
+           f' "{question}". The script should be well-documented with proper comments, adhere to best coding practices,' \
+           f' and incorporate error handling, structured functions, and Python specific features.\n' \
+           f'When creating the script, ensure that the output is formatted for readability and includes error handling to' \
+           f' gracefully handle any exceptions that may occur during script execution.\n' \
+           f'Organize the script into reusable functions to modularize the code and promote maintainability and readability.' \
+           f' Encourage code reuse by utilizing functions for common tasks or processes.\n' \
+           f'Adhere to Python coding best practices, such as using appropriate libraries, proper variable usage, exception' \
+           f' handling, script structure, and efficiency optimizations. Avoid common pitfalls in Python programming.\n' \
+           f'Include header comments detailing the script name, purpose, author, version, and license information. Document' \
+           f' the scripts usage, input parameters, and any dependencies required for proper execution.\n' \
+           f'Create a requirements.txt file that lists the required packages and versions needed for the script to run properly.'\
+           f'The script should be concise, efficient, and well-organized, promoting clarity and maintainability. Aim for a' \
+           f'The script should be written in {report_format} format and have a minimum length of {total_words} words.'\
+           
+def generate_dockerfile_prompt(context, total_words=2000):
+    """Generates a prompt for building Dockerfiles with proper comments, best practices, and optimization techniques.
+
+    Args:
+        context (str): Context or description related to the Dockerfile.
+        total_words (int, optional): The desired total word count for the Dockerfile prompt.
+
+    Returns:
+        str: Dockerfile prompt for the given context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design a Dockerfile that creates a Docker image for the specified application or service.' \
+           f' The Dockerfile should adhere to best practices, include proper comments, and utilize optimization techniques.\n' \
+           f'When building the Dockerfile, make sure to include all necessary instructions to create a functioning and optimized' \
+           f' Docker image. This may include instructions like "FROM", "RUN", "COPY", "EXPOSE", "CMD", and others.\n' \
+           f'Optimize the Dockerfile by using multi-stage builds, proper layering techniques, and other optimization approaches' \
+           f' to reduce the image size and improve performance.\n' \
+           f'Include comments in the Dockerfile to explain each instruction, provide context, and document any special considerations' \
+           f' or requirements.\n' \
+           f'Adhere to Docker best practices, such as using the appropriate base image, minimizing the number of layers, declaring' \
+           f' and managing dependencies, and properly configuring the container runtime environment.\n' \
+           f'The Dockerfile should be well-organized, easy to understand, and promote reusability.\n' \
+           f'The prompt should be written in Dockerfile format and have a minimum length of {total_words} words.'\
 
 def generate_azure_devops_yaml_prompt(question, context, report_format="yaml", total_words=2000):
     """Generates the Azure DevOps YAML pipeline builder prompt for a given question and context.
@@ -294,7 +366,10 @@ def get_report_by_type(report_type):
         'azuredevops_pipeline_report': generate_azure_devops_yaml_prompt,
         'gitlab_pipeline_report': generate_gitlab_ci_yml_prompt,
         'code_printer_report': generate_code_printer_prompt,
-        'code_builder_report': generate_code_builder_prompt,
+        'bash_script': generate_bash_script_prompt,
+        'dockerfile_script': generate_dockerfile_prompt,
+        'python_script': generate_python_script_prompt,
+        'powershell_script': generate_powershell_script_prompt,
         'medical_report': generate_medical_research_report_prompt,
         'architecture_report': generate_software_architecture_report_prompt,
         'market_report': generate_market_analysis_report_prompt,
