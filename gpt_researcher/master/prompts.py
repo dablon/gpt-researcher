@@ -87,6 +87,32 @@ def generate_gitlab_ci_prompt(question, context, report_format="yaml", total_wor
            f'The gitlab-ci.yml file should be well-organized, easy to understand, and promote reusability.\n' \
            f'The prompt should be written in {report_format} format and have a minimum length of {total_words} words.'
 
+def generate_mongodb_js_script_prompt(question, context, report_format="code", total_words=2000):
+    """
+    Generates a prompt for building a MongoDB JavaScript script with proper comments, best practices, and optimization techniques.
+
+    Args:
+        question (str): The prompt question to generate the MongoDB JavaScript script for.
+        context (str): Context or description related to the MongoDB JavaScript script.
+        report_format (str, optional): The format of the generated prompt (e.g., "code", "plaintext").
+        total_words (int, optional): The desired total word count for the MongoDB JavaScript script prompt.
+
+    Returns:
+        str: MongoDB JavaScript script prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design a MongoDB JavaScript script that addresses the following' \
+           f' question or task: "{question}". The JavaScript script should interact with a MongoDB database, include proper comments,' \
+           f' adhere to best practices, and utilize optimization techniques.\n' \
+           f'When creating the MongoDB JavaScript script, make sure to include all necessary operations such as querying,' \
+           f' inserting, updating, and deleting documents. Consider using indexes, aggregation pipelines, batching, and other' \
+           f' optimization techniques to improve performance and efficiency.\n' \
+           f'Include comments in the JavaScript script to explain the purpose of each operation, provide context, and document' \
+           f' any special considerations or requirements.\n' \
+           f'Adhere to MongoDB best practices, such as using the appropriate methods, indexing strategies, schema design,' \
+           f' and connection management techniques.\n' \
+           f'The JavaScript script should be well-organized, easy to understand, and promote reusability.\n' \
+           f'The prompt should be written in {report_format} format and have a minimum length of {total_words} words.'
+
 def generate_bash_script_prompt(question, context, report_format="code", total_words=2000):
     """Generates a prompt for creating a Bash script with proper comments, color-coding, error handling, functions, and best practices.
 
@@ -138,6 +164,28 @@ def generate_powershell_script_prompt(question, context, report_format="code", t
            f' the scripts usage, input parameters, and any dependencies required for proper execution.\n' \
            f'The script should be concise, efficient, and well-organized, promoting clarity and maintainability. Aim for a' \
            f'The script should be written in {report_format} format and have a minimum length of {total_words} words.'\
+
+def generate_error_hunting_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for error hunting and resolving issues.
+
+    Args:
+        question (str): The question associated with the error or issue.
+        context (str): The context or description related to the error or issue.
+        report_format (str, optional): The format of the generated prompt (e.g., "code", "plaintext").
+        total_words (int, optional): The desired total word count for the prompt.
+
+    Returns:
+        str: The prompt for error hunting and resolving issues.
+    """
+    return f'"""{context}"""\n\nTo troubleshoot and resolve the issue described in the given context, create a' \
+           f' detailed prompt that addresses the following question: "{question}". The prompt should be thorough' \
+           f' and provide step-by-step instructions for identifying and troubleshooting the issue.' \
+           f' Explain the potential causes of the issue, provide strategies for determining the root cause,' \
+           f' and suggest actions or fixes to resolve the issue.\n' \
+           f'Additionally, include recommendations for best practices or preventive measures to avoid similar issues' \
+           f' in the future.\n' \
+           f' include references of websites with the resolution of error.\n' \
+           f'This prompt should be written in {report_format} format and have a minimum length of {total_words} words.'
 
 def generate_python_script_prompt(question, context, report_format="code", total_words=2000):
     """Generates a prompt for creating a Python script with proper comments, error handling, functions, best practices, and requirements.txt.
@@ -292,6 +340,38 @@ def generate_market_analysis_report_prompt(question, context, report_format="mar
            ' business professionals.\n' \
             'Conclude with actionable insights and strategic recommendations based on your findings.'
 
+
+def generate_netcore_app_prompt(question, context, report_format="code", total_words=5000):
+    """Generates a prompt for building a .NET Core application with proper comments, best practices, and optimization techniques.
+
+    Args:
+        question (str): The prompt question to generate the .NET Core application for.
+        context (str): Context or description related to the .NET Core application.
+        report_format (str, optional): The format of the generated prompt (e.g., "code", "plaintext").
+        total_words (int, optional): The desired total word count for the .NET Core application prompt.
+
+    Returns:
+        str: .NET Core application prompt for the given question and context.
+    """
+    return f'"code": """{context}"""\n\nBased on the provided context, design a .NET Core application that addresses the' \
+           f' question or task: "{question}". The application should include proper comments, adhere to best practices,' \
+           f' and utilize optimization techniques.\n\n' \
+           f'Consider the following guidelines when creating the .NET Core application:\n\n' \
+           f'- Structure your project using recommended practices, such as separating layers for presentation,' \
+           f' business logic, and data access.\n' \
+           f'- Utilize design patterns and practices like dependency injection, asynchronous programming, caching,' \
+           f' and other optimization techniques to improve performance and efficiency.\n' \
+           f'- Include comments in the code to explain the purpose of each section, provide context, and document' \
+           f' any special considerations or requirements.\n' \
+           f'- Adhere to .NET Core best practices, such as following naming conventions, handling exceptions,' \
+           f' and securing sensitive information.\n' \
+           f'- Ensure that your .NET Core application is well-organized, easy to understand, and promotes reusability.' \
+           f' Aim for clean and maintainable code.\n\n' \
+           f'The prompt should be written in {report_format} format and have a minimum length of approximately {total_words}' \
+           f' words.\n\n' \
+           f'Feel free to modify the provided function prompt as per your specific requirements and needs.'
+
+
 def generate_report_prompt(question, context, report_format="apa", total_words=1000):
     """ Generates the report prompt for the given question and research summary.
     Args: question (str): The question to generate the report prompt for
@@ -356,6 +436,7 @@ def generate_outline_report_prompt(question, context, report_format="apa", total
 
 def get_report_by_type(report_type):
     report_type_mapping = {
+        'error_hunting_report': generate_error_hunting_prompt,
         'research_report': generate_report_prompt,
         'readme_report': generate_readme_report_prompt,
         'azuredevops_pipeline_report': generate_azure_pipeline_prompt,
@@ -365,6 +446,8 @@ def get_report_by_type(report_type):
         'dockerfile_script': generate_dockerfile_prompt,
         'python_script': generate_python_script_prompt,
         'powershell_script': generate_powershell_script_prompt,
+        'mongodb_js_script': generate_mongodb_js_script_prompt,
+        'netcore_app': generate_netcore_app_prompt,
         'medical_report': generate_medical_research_report_prompt,
         'architecture_report': generate_software_architecture_report_prompt,
         'market_report': generate_market_analysis_report_prompt,
