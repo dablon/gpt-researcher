@@ -37,7 +37,7 @@ def generate_readme_report_prompt(question, context, report_format="markdown", t
            ' the software.\n' \
             'Proofread and edit the README file to ensure accuracy and clarity.'
 
-def generate_code_printer_prompt(question, context, report_format="plaintext", total_words=500):
+def generate_code_printer_prompt(question, context, report_format="plaintext", total_words=5000):
     """Generates the code printer prompt for a given question and context.
 
     Args:
@@ -293,6 +293,8 @@ def get_report_by_type(report_type):
         'readme_report': generate_readme_report_prompt,
         'azuredevops_pipeline_report': generate_azure_devops_yaml_prompt,
         'gitlab_pipeline_report': generate_gitlab_ci_yml_prompt,
+        'code_printer_report': generate_code_printer_prompt,
+        'code_builder_report': generate_code_builder_prompt,
         'medical_report': generate_medical_research_report_prompt,
         'architecture_report': generate_software_architecture_report_prompt,
         'market_report': generate_market_analysis_report_prompt,
