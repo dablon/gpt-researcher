@@ -37,6 +37,64 @@ def generate_readme_report_prompt(question, context, report_format="markdown", t
            ' the software.\n' \
             'Proofread and edit the README file to ensure accuracy and clarity.'
 
+def generate_gitlab_ci_yml_prompt(question, context, report_format="markdown", total_words=2000):
+    """Generates the GitLab CI/CD pipeline YAML builder prompt for a given question and context.
+
+    Args:
+        question (str): The question or topic to generate the prompt for.
+        context (str): The context or description related to the GitLab CI/CD pipeline.
+        report_format (str, optional): The desired format of the pipeline (markdown by default).
+        total_words (int, optional): The desired length of the pipeline prompt in words (2000 by default).
+
+    Returns:
+        str: The GitLab CI/CD pipeline YAML builder prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, generate a GitLab CI/CD pipeline YAML file for the following' \
+           f' question or topic: "{question}". The pipeline should be defined using GitLab CI/CD syntax and follow best' \
+           f' practices for building, testing, and deploying applications.\n' \
+           f'The GitLab CI/CD pipeline should include stages for building, testing, and deploying the application to' \
+           f' different environments. Utilize GitLab Runners, services, and artifacts as needed for your project requirements.\n' \
+           f'The pipeline should have proper triggers, such as branch filters or manual approval, to control when' \
+           f' it runs. Consider defining variables, artifacts, caches, and environment configurations in the YAML file.\n' \
+           f'Maintain pipeline efficiency and reliability by organizing jobs, grouping stages, and using parallelization' \
+           f' effectively. Ensure proper error handling, logging, and notifications throughout the pipeline.\n' \
+           f'Document the pipeline configuration and parameters, including any required authentication tokens or secrets.' \
+           f' Provide clear instructions on how to set up and configure the pipeline in GitLab, and share any' \
+           f' recommendations for managing pipeline dependencies, versioning, and security.\n' \
+           f'The resulting GitLab CI/CD pipeline YAML file should automate the build, test, and deployment processes for' \
+           f' your project, enhancing efficiency and reliability in software delivery.\n\n' \
+           f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
+
+def generate_azure_devops_yaml_prompt(question, context, report_format="markdown", total_words=2000):
+    """Generates the Azure DevOps YAML pipeline builder prompt for a given question and context.
+
+    Args:
+        question (str): The question or topic to generate the prompt for.
+        context (str): The context or description related to the Azure DevOps YAML pipeline.
+        report_format (str, optional): The desired format of the pipeline (markdown by default).
+        total_words (int, optional): The desired length of the pipeline prompt in words (2000 by default).
+
+    Returns:
+        str: The Azure DevOps YAML pipeline builder prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, generate an Azure DevOps YAML pipeline for the following' \
+           f' question or topic: "{question}". The pipeline should be defined using YAML syntax and follow best practices' \
+           f' for building and deploying applications on Azure DevOps.\n' \
+           f'The Azure DevOps YAML pipeline should include stages for building, testing, and deploying the application to' \
+           f' different environments. Utilize Azure DevOps tasks and services such as Azure Container Registry, Azure' \
+           f' Kubernetes Service, Azure Web App, and others as needed for your project requirements.\n' \
+           f'The pipeline should have proper triggers, such as branch filters or pull request validations, to ensure that' \
+           f' it is triggered at the correct times. Consider defining variables, resources, and environment configurations' \
+           f' in the YAML pipeline file.\n' \
+           f'Maintain pipeline reliability and efficiency by using template files, conditionals, and loops when' \
+           f' applicable. Minimize duplication and ensure maintainability.\n' \
+           f'Document the pipeline configuration and parameters, including any required authentication tokens or secrets.' \
+           f' Provide clear instructions on how to import and configure the pipeline in Azure DevOps, and share any' \
+           f' recommendations for managing pipeline dependencies and versioning.\n' \
+           f'The resulting Azure DevOps YAML pipeline should automate the build, test, and deployment processes for your' \
+           f' project, enhancing efficiency and reliability in software delivery.\n\n' \
+           f'The report should be written in {report_format} format and have a minimum length of {total_words} words.'
+
 def generate_medical_research_report_prompt(question, context, report_format="markdown", total_words=2000):
     """Generates the medical research report prompt for the given question and research summary in the medical field.
 
@@ -179,6 +237,8 @@ def get_report_by_type(report_type):
     report_type_mapping = {
         'research_report': generate_report_prompt,
         'readme_report': generate_readme_report_prompt,
+        'azuredevops_pipeline_report': generate_azure_devops_yaml_prompt,
+        'gitlab_pipeline_report': generate_gitlab_ci_yml_prompt,
         'medical_report': generate_medical_research_report_prompt,
         'architecture_report': generate_software_architecture_report_prompt,
         'market_report': generate_market_analysis_report_prompt,
