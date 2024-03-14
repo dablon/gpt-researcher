@@ -358,8 +358,8 @@ def get_report_by_type(report_type):
     report_type_mapping = {
         'research_report': generate_report_prompt,
         'readme_report': generate_readme_report_prompt,
-        'azuredevops_pipeline_report': generate_azure_devops_yaml_prompt,
-        'gitlab_pipeline_report': generate_gitlab_ci_yml_prompt,
+        'azuredevops_pipeline_report': generate_azure_pipeline_prompt,
+        'gitlab_pipeline_report': generate_gitlab_ci_prompt,
         'code_printer_report': generate_code_printer_prompt,
         'bash_script': generate_bash_script_prompt,
         'dockerfile_script': generate_dockerfile_prompt,
