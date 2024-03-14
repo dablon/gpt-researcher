@@ -16,6 +16,7 @@ fastapi
 python-multipart
 markdown
 langchain
+langchain-openai
 tavily-python
 arxiv
 PyMuPDF

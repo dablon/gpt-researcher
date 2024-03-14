@@ -11,7 +11,7 @@ def generate_search_queries_prompt(question, max_iterations=3):
            f'Use the current date if needed: {datetime.now().strftime("%B %d, %Y")}.\n' \
            f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3"].'
 
-def generate_readme_report_prompt(question, context, report_format="apa", total_words=800):
+def generate_readme_report_prompt(question, context, report_format="markdown", total_words=2000):
     """Generates the README report prompt for a given question and context related to a software project's README file.
 
     Args:
@@ -37,7 +37,7 @@ def generate_readme_report_prompt(question, context, report_format="apa", total_
            ' the software.\n' \
             'Proofread and edit the README file to ensure accuracy and clarity.'
 
-def generate_medical_research_report_prompt(question, context, report_format="apa", total_words=1500):
+def generate_medical_research_report_prompt(question, context, report_format="markdown", total_words=2000):
     """Generates the medical research report prompt for the given question and research summary in the medical field.
 
     Args:
@@ -61,7 +61,7 @@ def generate_medical_research_report_prompt(question, context, report_format="ap
            f'The desired length of the report is at least {total_words} words.\n' \
             'Include references to all cited sources, ensuring they are reliable and current.'
 
-def generate_software_architecture_report_prompt(question, context, report_format="apa", total_words=2000):
+def generate_software_architecture_report_prompt(question, context, report_format="markdown", total_words=2000):
     """Generates the software architecture report prompt for a given question and context related to software architecture.
 
     Args:
@@ -88,7 +88,7 @@ def generate_software_architecture_report_prompt(question, context, report_forma
             'Conclude with a clear and well-justified recommendation for the software architecture that best meets' \
             ' the requirements of the given scenario.'
 
-def generate_market_analysis_report_prompt(question, context, report_format="apa", total_words=1200):
+def generate_market_analysis_report_prompt(question, context, report_format="markdown", total_words=2000):
     """Generates the market analysis report prompt for a given question and context related to market trends or business research.
 
     Args:
