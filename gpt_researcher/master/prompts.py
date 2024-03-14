@@ -11,28 +11,31 @@ def generate_search_queries_prompt(question, max_iterations=3):
            f'Use the current date if needed: {datetime.now().strftime("%B %d, %Y")}.\n' \
            f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3"].'
 
-def generate_readme_report_prompt(question, context, report_format="apa", total_words=1000):
-# def generate_readme_report_prompt(project_name, research_summary):
-    """
-    Generates the README.md report prompt for the given project and research summary.
+def generate_readme_report_prompt(question, context, report_format="apa", total_words=800):
+    """Generates the README report prompt for a given question and context related to a software project's README file.
 
     Args:
-        project_name (str): The name of the project to generate the report prompt for.
-        research_summary (str): The research summary to generate the report prompt for.
+        question (str): The question to generate the README report prompt for.
+        context (str): The context or description of the software project to generate the README report prompt for.
 
     Returns:
-        str: The README.md report prompt for the given project and research summary.
+        str: The README report prompt for the given question and context.
     """
-
-
-    return f'"""{context}""" Based on the provided information, research and implement a comprehensive README.md'\
-           f' guide for the "{question}" question. The guide should provide clear instructions on how to set up'\
-           f' the project, including installation steps, dependencies, and configuration details. Include information'\
-           f' on project structure, file organization, and usage examples. Provide explanations of key concepts,'\
-           f' features, and functionality. Consider best practices for documentation and readability. Ensure that the'\
-           f' guide is well-structured, informative, and follows appropriate formatting (Markdown syntax). Write all'\
-           f' source URLs at the end of the guide in APA format. The guide should have a minimum length of 1,200 words'\
-           f' and with Markdown syntax and APA format.'
+    return f'"""{context}"""\n\nBased on the provided software project context, create a detailed README file for the project.' \
+           f' The README file should answer the question: "{question}". It should provide clear instructions on how to install,' \
+           ' configure, and use the software. Include information on dependencies, system requirements, and any additional' \
+           ' setup steps.\n' \
+           'The README file should also include a description of the projects purpose, features, and functionality. Provide' \
+           ' examples or screenshots to demonstrate the usage and showcase the project.\n' \
+           'Organize the README file with sections such as Introduction, Installation, Usage, Features, Requirements,' \
+           ' Contributors, and more as appropriate. Use Markdown syntax for formatting and ensure readability.\n' \
+           'Adhere to best practices for writing a README file, providing clear and concise content that is easy for users' \
+           ' to understand. Consider the intended audience and ensure that the language and level of technical detail are' \
+           ' appropriate for users of the software.\n' \
+           'The README file should be well-structured, informative, engaging,  follows appropriate formatting (Markdown syntax) and at least {total_words} words in length.' \
+           ' Include any necessary commands, code snippets, or configuration files to assist users in getting started with' \
+           ' the software.\n' \
+            'Proofread and edit the README file to ensure accuracy and clarity.'
 
 def generate_medical_research_report_prompt(question, context, report_format="apa", total_words=1500):
     """Generates the medical research report prompt for the given question and research summary in the medical field.
