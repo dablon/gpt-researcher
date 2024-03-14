@@ -68,7 +68,7 @@
 <body>
 
     <main class="container" id="form">
-        <!-- <div class="agent-item"><img src="/static/defaultAgentAvatar.JPG" class="avatar" alt="Auto Agent"></div> -->
+        <div class="agent-item"><img src="/static/defaultAgentAvatar.JPG" class="avatar" alt="Auto Agent"></div>
         <form method="POST" class="mt-3" onsubmit="GPTResearcher.startResearch(); return false;">
             <div class="form-group">
                 <label for="task" class="agent-question">What would you like me to research next?</label>
@@ -80,21 +80,19 @@
                     generate?</label>
                 <select name="report_type" class="form-control" required>
                     <option value="research_report">Research Report</option>
-                    <!-- <option value="readme_report">Readme Builder</option> -->
+                    <option value="readme_report">Readme Builder</option>
                     <option value="azuredevops_pipeline_report">Azure Devops Pipeline</option>
                     <option value="gitlab_pipeline_report">Gitlab Pipeline</option>
-                    <!-- <option value="medical_report">Medical Report</option> -->
-                    <option value="code_printer_report">Code Printer</option>
-                    <option value="bash_script">Bash Script</option>
-                    <option value="bash_script">Powershell Script</option>
-                    <option value="bash_script">Python Script</option>
                     <option value="architecture_report">Architecture Report</option>
+                    <option value="bash_script">Bash Script</option>
                     <option value="dockerfile_script">Dockerfile</option>
                     <option value="python_script">Python Script</option>
                     <option value="powershell_script">Powershell Script</option>
-                    <!-- <option value="market_report">Market Report</option>
+                    <option value="code_printer_report">Code Printer</option>
+                    <option value="medical_report">Medical Report</option>
+                    <option value="market_report">Market Report</option>
                     <option value="resource_report">Resource Report</option>
-                    <option value="outline_report">Outline Report</option> -->
+                    <option value="outline_report">Outline Report</option>
                 </select>
             </div>
             <!-- <div class="form-group">

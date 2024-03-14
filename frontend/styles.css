@@ -126,17 +126,17 @@ footer {
 }
 
 #reportContainer {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc;
     padding: 10px;
     margin-top: 20px;
     font-family: courier, monospace;
     white-space: pre-wrap;
     background-color: white;
-    color: black;
-    /* background-color: rgba(255,255,255,0.1);
+    color: black; */
+    background-color: rgba(255,255,255,0.1);
     border: none;
     color: #fff;
     transition: all .3s ease-in-out;
     padding: 10px;
-    border-radius: 12px; */
+    border-radius: 12px;
 }
