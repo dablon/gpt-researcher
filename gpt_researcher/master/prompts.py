@@ -168,18 +168,20 @@ def generate_python_script_prompt(question, context, report_format="code", total
            f'The script should be concise, efficient, and well-organized, promoting clarity and maintainability. Aim for a' \
            f'The script should be written in {report_format} format and have a minimum length of {total_words} words.'\
            
-def generate_dockerfile_prompt(context, total_words=2000):
+def generate_dockerfile_prompt(question, context, report_format="code", total_words=2000):
     """Generates a prompt for building Dockerfiles with proper comments, best practices, and optimization techniques.
 
     Args:
+        question (str): The prompt question to generate the Dockerfile for.
         context (str): Context or description related to the Dockerfile.
+        report_format (str, optional): The format of the generated prompt (e.g., "code", "plaintext").
         total_words (int, optional): The desired total word count for the Dockerfile prompt.
 
     Returns:
-        str: Dockerfile prompt for the given context.
+        str: Dockerfile prompt for the given question and context.
     """
-    return f'"""{context}"""\n\nBased on the provided context, design a Dockerfile that creates a Docker image for the specified application or service.' \
-           f' The Dockerfile should adhere to best practices, include proper comments, and utilize optimization techniques.\n' \
+    return f'"""{context}"""\n\nBased on the provided context, design a Dockerfile that addresses the following question or task:' \
+           f' "{question}". The Dockerfile should adhere to best practices, include proper comments, and utilize optimization techniques.\n' \
            f'When building the Dockerfile, make sure to include all necessary instructions to create a functioning and optimized' \
            f' Docker image. This may include instructions like "FROM", "RUN", "COPY", "EXPOSE", "CMD", and others.\n' \
            f'Optimize the Dockerfile by using multi-stage builds, proper layering techniques, and other optimization approaches' \
@@ -189,8 +191,8 @@ def generate_dockerfile_prompt(context, total_words=2000):
            f'Adhere to Docker best practices, such as using the appropriate base image, minimizing the number of layers, declaring' \
            f' and managing dependencies, and properly configuring the container runtime environment.\n' \
            f'The Dockerfile should be well-organized, easy to understand, and promote reusability.\n' \
-           f'The prompt should be written in Dockerfile format and have a minimum length of {total_words} words.'\
-
+           f'The prompt should be written in {report_format} format and have a minimum length of {total_words} words.'\
+           
 def generate_azure_devops_yaml_prompt(question, context, report_format="yaml", total_words=2000):
     """Generates the Azure DevOps YAML pipeline builder prompt for a given question and context.
 
