@@ -77,7 +77,7 @@ def generate_software_architecture_report_prompt(question, context, report_forma
            'The report must follow recognized standards and best practices for software architecture design. Structure the' \
            ' report with sections including but not limited to introduction, requirements analysis, architectural solution' \
            ' evaluation, and recommendation. Include supporting diagrams, such as system architecture diagrams or sequence' \
-           ' diagrams, to enhance clarity and understanding.\n' \
+           ' diagrams, in mermaid format to enhance clarity and understanding.\n' \
            'Consider the intended audience, and ensure the language and level of technical detail are suitable for' \
            ' software architects, engineers, and project stakeholders.\n' \
            'Adhere to the specified report format ('f'{report_format}) and ensure proper citation of all referenced sources.' \
