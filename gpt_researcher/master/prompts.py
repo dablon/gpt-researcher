@@ -340,6 +340,32 @@ def generate_market_analysis_report_prompt(question, context, report_format="mar
            ' business professionals.\n' \
             'Conclude with actionable insights and strategic recommendations based on your findings.'
 
+def generate_html_website_builder_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for building an HTML website.
+
+    Args:
+        question (str): The prompt question to generate the HTML website builder for.
+        context (str): Context or description related to the HTML website builder.
+        report_format (str, optional): The format of the generated prompt (e.g., "code", "plaintext").
+        total_words (int, optional): The desired total word count for the HTML website builder prompt.
+
+    Returns:
+        str: HTML website builder prompt for the given question and context.
+    """
+    return f'"""{context}"""\n\nBased on the provided context, design an HTML website builder that addresses the following' \
+           f' question or task: "{question}". The website builder should allow users to create professional-looking' \
+           f' websites by generating HTML code.\n' \
+           f'When creating the HTML website builder, consider the following guidelines:\n' \
+           f'- Provide an intuitive user interface that allows users to easily add components (e.g., headings,' \
+           f' paragraphs, images, links) to their websites.\n' \
+           f'- Implement features that enable users to customize the appearance of their websites, such as' \
+           f' choosing fonts, colors, and layouts.\n' \
+           f'- Include functionality for users to preview their websites in real-time as they make changes.\n' \
+           f'- Ensure that the generated HTML code is clean, semantic, and follows best practices.\n' \
+           f'- Implement error checking and validation to prevent users from entering invalid input.\n' \
+           f'- Consider incorporating responsive design principles to ensure that websites created with the builder' \
+           f' are mobile-friendly.\n\n' \
+           f'The prompt should be written in {report_format} format and have a minimum length of {total_words} words.'
 
 def generate_netcore_app_prompt(question, context, report_format="code", total_words=5000):
     """Generates a prompt for building a .NET Core application with proper comments, best practices, and optimization techniques.
@@ -440,6 +466,7 @@ def get_report_by_type(report_type):
         'research_report': generate_report_prompt,
         'readme_report': generate_readme_report_prompt,
         'azuredevops_pipeline_report': generate_azure_pipeline_prompt,
+        'html_builder_site': generate_html_website_builder_prompt,
         'gitlab_pipeline_report': generate_gitlab_ci_prompt,
         'code_printer_report': generate_code_printer_prompt,
         'bash_script': generate_bash_script_prompt,
