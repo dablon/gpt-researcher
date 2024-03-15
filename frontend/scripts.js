@@ -62,9 +62,12 @@ const GPTResearcher = (() => {
   const writeReport = (data, converter) => {
 
     const reportContainer = document.getElementById("reportContainer");
-    const preElement = document.createElement("pre");
-    preElement.textContent = data.output;
-    reportContainer.appendChild(preElement);
+    // const preElement = document.createElement("pre");
+    // preElement.textContent = data.output;
+    // reportContainer.appendChild(preElement);
+    // const markdownOutput = converter.makeHtml(data.output);
+    // reportContainer.innerHTML += markdownOutput;
+    reportContainer.innerText+= data.output;
     updateScroll();
   };
 

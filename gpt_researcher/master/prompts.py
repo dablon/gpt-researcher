@@ -340,8 +340,8 @@ def generate_market_analysis_report_prompt(question, context, report_format="mar
            ' business professionals.\n' \
             'Conclude with actionable insights and strategic recommendations based on your findings.'
 
-def generate_html_website_builder_prompt(question, context, report_format="code", total_words=6000):
-    """Generates a prompt for building an HTML website builder that generates index.html, script.js, and style.css.
+def generate_html_website_builder_prompt(question, context, report_format="code", total_words=2000):
+    """Generates a prompt for building an HTML website.
 
     Args:
         question (str): The prompt question to generate the HTML website builder for.
@@ -352,22 +352,21 @@ def generate_html_website_builder_prompt(question, context, report_format="code"
     Returns:
         str: HTML website builder prompt for the given question and context.
     """
-    return f'"code": """{context}"""\n\nBased on the provided context, design an HTML website builder that addresses the' \
-           f' question or task: "{question}". The website builder should generate the necessary files, including' \
-           f' `index.html`, `script.js`, and `style.css`, to create a functional website.\n\n' \
-           f'When building the HTML website builder, consider the following guidelines:\n' \
-           f'- Allow users to specify the content and structure of their website using an intuitive interface or' \
-           f' markup language.\n' \
-           f'- Provide options for users to customize the behavior and appearance of their website through' \
-           f' generated JavaScript code in `script.js` and CSS code in `style.css`.\n' \
-           f'- Ensure that the generated `index.html` file is structured correctly with appropriate HTML tags,' \
-           f' semantic content, and proper accessibility considerations.\n' \
-           f'- Implement error handling and validation to prevent users from producing invalid or insecure code.\n' \
-           f'- Consider incorporating modern web development techniques, such as responsive design, to make the' \
-           f' generated websites mobile-friendly and accessible on various devices.\n' \
-           f'- Output clean and well-formatted code in each generated file to enhance readability and maintainability.\n\n' \
-           f'The prompt should be written in {report_format} format and have a length of approximately {total_words}' \
-           
+    return f'"""{context}"""\n\nBased on the provided context, design an HTML website builder that addresses the following' \
+           f' question or task: "{question}". The website builder should allow users to create professional-looking' \
+           f' websites by generating HTML code.\n' \
+           f'When creating the HTML website builder, consider the following guidelines:\n' \
+           f'- Provide an intuitive user interface that allows users to easily add components (e.g., headings,' \
+           f' paragraphs, images, links) to their websites.\n' \
+           f'- Implement features that enable users to customize the appearance of their websites, such as' \
+           f' choosing fonts, colors, and layouts.\n' \
+           f'- Include functionality for users to preview their websites in real-time as they make changes.\n' \
+           f'- Ensure that the generated HTML code is clean, semantic, and follows best practices.\n' \
+           f'- Implement error checking and validation to prevent users from entering invalid input.\n' \
+           f'- Consider incorporating responsive design principles to ensure that websites created with the builder' \
+           f' are mobile-friendly.\n\n' \
+           f'The prompt should be written in {report_format} format and have a minimum length of {total_words} words.'
+
 def generate_netcore_app_prompt(question, context, report_format="code", total_words=5000):
     """Generates a prompt for building a .NET Core application with proper comments, best practices, and optimization techniques.
 
